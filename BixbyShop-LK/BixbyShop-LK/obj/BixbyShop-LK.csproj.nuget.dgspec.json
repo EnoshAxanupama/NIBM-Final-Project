@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MSI\\source\\repos\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj": {}
+    "C:\\NIBM Group Project GUI\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MSI\\source\\repos\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj": {
+    "C:\\NIBM Group Project GUI\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MSI\\source\\repos\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj",
+        "projectUniqueName": "C:\\NIBM Group Project GUI\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj",
         "projectName": "BixbyShop-LK",
-        "projectPath": "C:\\Users\\MSI\\source\\repos\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj",
+        "projectPath": "C:\\NIBM Group Project GUI\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj",
         "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MSI\\source\\repos\\BixbyShop-LK\\BixbyShop-LK\\obj\\",
+        "outputPath": "C:\\NIBM Group Project GUI\\BixbyShop-LK\\BixbyShop-LK\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "NHibernate": {
+              "target": "Package",
+              "version": "[5.4.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
