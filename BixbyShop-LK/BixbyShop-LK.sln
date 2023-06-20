@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BixbyShop-LK", "BixbyShop-LK\BixbyShop-LK.csproj", "{92BEE27F-F2E9-429F-A3E8-B9899AD2DD97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92BEE27F-F2E9-429F-A3E8-B9899AD2DD97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92BEE27F-F2E9-429F-A3E8-B9899AD2DD97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92BEE27F-F2E9-429F-A3E8-B9899AD2DD97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92BEE27F-F2E9-429F-A3E8-B9899AD2DD97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E95AC82-C758-406C-853C-602343397999}
+	EndGlobalSection
+EndGlobal
