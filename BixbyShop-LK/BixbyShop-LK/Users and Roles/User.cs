@@ -1,15 +1,13 @@
 ﻿using BixbyShop_LK.Users_and_Roles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace BixbyShop_LK
 {
     public class User
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         private long id;
         private String fistName;
         private String lastName;

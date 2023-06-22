@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace BixbyShop_LK.Users_and_Roles
 {
     public class Roles
     {
+        [Key]
         private String role;
         public string Role
         {
