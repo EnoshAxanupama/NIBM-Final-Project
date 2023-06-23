@@ -1,5 +1,4 @@
 ﻿using BixbyShop_LK.Models.Item;
-using BixbyShop_LK.Models.Order;
 using System.ComponentModel.DataAnnotations;
 
 namespace BixbyShop_LK.Models.Comments
@@ -8,7 +7,7 @@ namespace BixbyShop_LK.Models.Comments
     {
         [Key]
         private long id;
-        private String comment;
+        private string comment;
 
         private User user;
         private long userId;
@@ -16,10 +15,22 @@ namespace BixbyShop_LK.Models.Comments
         private ShopItem shopItem;
         private long shopItemId;
 
-        public ShopItem ShopItem
+        public long Id
         {
-            get { return shopItem; }
-            set { shopItem = value; }
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string UserComment
+        {
+            get { return comment; }
+            set { comment = value; }
+        }
+
+        public long UserId
+        {
+            get { return userId; }
+            set { userId = value; }
         }
 
         public long ShopItemId
@@ -34,22 +45,10 @@ namespace BixbyShop_LK.Models.Comments
             set { user = value; }
         }
 
-        public String UserComment
+        public ShopItem ShopItem
         {
-            get { return comment; }
-            set { comment = value; }
-        }
-
-        public long Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-
-        public long UserId
-        {
-            get { return userId; }
-            set { userId = value; }
+            get { return shopItem; }
+            set { shopItem = value; }
         }
     }
 }

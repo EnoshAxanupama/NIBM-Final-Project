@@ -5,14 +5,22 @@ namespace BixbyShop_LK.Users_and_Roles
     public class Roles
     {
         [Key]
-        private String role;
+        private string role;
+
+        private ICollection<Authority> authorities;
+        private ICollection<User> users;
+
+        public Roles()
+        {
+            authorities = new List<Authority>();
+            users = new List<User>();
+        }
+
         public string Role
         {
             get { return role; }
             set { role = value?.Trim(); }
         }
-
-        private ICollection<Authority> authorities;
 
         public ICollection<Authority> Authorities
         {
@@ -20,9 +28,9 @@ namespace BixbyShop_LK.Users_and_Roles
             set { authorities = value; }
         }
 
-        private ICollection<User> users;
-        public ICollection<User> Users { 
-            get { return users; } 
+        public ICollection<User> Users
+        {
+            get { return users; }
             set { users = value; }
         }
     }

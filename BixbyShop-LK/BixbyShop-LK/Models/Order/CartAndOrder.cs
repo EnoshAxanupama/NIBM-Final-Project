@@ -9,20 +9,19 @@ namespace BixbyShop_LK.Models.Order
         private long id;
         private ShopItem item;
         private User user;
-
         private int quantity;
         private int price;
-
-        public ShopItem Item
-        {
-            get { return item; }
-            set { item = value; }
-        }
 
         public long Id
         {
             get { return id; }
             set { id = value; }
+        }
+
+        public ShopItem Item
+        {
+            get { return item; }
+            set { item = value; }
         }
 
         public User User

@@ -1,8 +1,8 @@
 ﻿using BixbyShop_LK.Users_and_Roles;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using BixbyShop_LK.Models.Order;
 using BixbyShop_LK.Models.Comments;
+using BixbyShop_LK.Models.Order;
 
 namespace BixbyShop_LK
 {
@@ -11,47 +11,36 @@ namespace BixbyShop_LK
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         private long id;
-        private String fistName;
-        private String lastName;
-        private String email;
-        private String address;
-        private String password;
-        private String pic;
+        private string firstName;
+        private string lastName;
+        private string email;
+        private string address;
+        private string password;
+        private string pic;
 
         private ICollection<Roles> roles;
         private ICollection<Order> orders;
         private ICollection<CartAndOrder> cart;
         private ICollection<Comment> comments;
 
-
-        public ICollection<Comment> Comments
+        public User()
         {
-            get { return comments; }
-            set { comments = value; }
+            roles = new List<Roles>();
+            orders = new List<Order>();
+            cart = new List<CartAndOrder>();
+            comments = new List<Comment>();
         }
 
-        public ICollection<CartAndOrder> Cart
+        public long Id
         {
-            get { return cart; }
-            set { cart = value; }
-        }
-
-        public ICollection<Order> Orders
-        {
-            get { return orders; }
-            set { orders = value; }
-        }
-
-        public ICollection<Roles> Roles
-        {
-            get { return roles; }
-            set { roles = value; }
+            get { return id; }
+            set { id = value; }
         }
 
         public string FirstName
         {
-            get { return fistName; }
-            set { fistName = value?.Trim(); }
+            get { return firstName; }
+            set { firstName = value?.Trim(); }
         }
 
         public string LastName
@@ -82,6 +71,30 @@ namespace BixbyShop_LK
         {
             get { return pic; }
             set { pic = value; }
+        }
+
+        public ICollection<Roles> Roles
+        {
+            get { return roles; }
+            set { roles = value; }
+        }
+
+        public ICollection<Order> Orders
+        {
+            get { return orders; }
+            set { orders = value; }
+        }
+
+        public ICollection<CartAndOrder> Cart
+        {
+            get { return cart; }
+            set { cart = value; }
+        }
+
+        public ICollection<Comment> Comments
+        {
+            get { return comments; }
+            set { comments = value; }
         }
     }
 }

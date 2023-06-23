@@ -7,27 +7,16 @@ namespace BixbyShop_LK.Models.Item
     {
         [Key]
         private long id;
-        private String name;
-        private String description;
-        private List<String> pics;
+        private string name;
+        private string description;
+        private List<string> pics;
         private int price;
 
         private ICollection<Comment> comments;
-        public ICollection<Comment> Comments
-        {
-            get { return comments; }
-            set { comments = value; }
-        }
 
-        public List<String> Pics
+        public ShopItem()
         {
-            get { return pics; }
-            set { pics = value; }
-        }
-        public int Price
-        {
-            get { return price; }
-            set { price = value; }
+            comments = new List<Comment>();
         }
 
         public long Id
@@ -36,16 +25,34 @@ namespace BixbyShop_LK.Models.Item
             set { id = value; }
         }
 
-        public String Name
+        public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
-        public String Description
+        public string Description
         {
             get { return description; }
             set { description = value; }
+        }
+
+        public List<string> Pics
+        {
+            get { return pics; }
+            set { pics = value; }
+        }
+
+        public int Price
+        {
+            get { return price; }
+            set { price = value; }
+        }
+
+        public ICollection<Comment> Comments
+        {
+            get { return comments; }
+            set { comments = value; }
         }
     }
 }

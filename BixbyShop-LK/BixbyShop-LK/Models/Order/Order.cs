@@ -10,16 +10,21 @@ namespace BixbyShop_LK.Models.Order
         private User user;
         private int price;
 
-        public ICollection<CartAndOrder> Items
+        public Order()
         {
-            get { return items; }
-            set { items = value; }
+            items = new List<CartAndOrder>();
         }
 
         public long Id
         {
             get { return id; }
             set { id = value; }
+        }
+
+        public ICollection<CartAndOrder> Items
+        {
+            get { return items; }
+            set { items = value; }
         }
 
         public User User
@@ -33,7 +38,5 @@ namespace BixbyShop_LK.Models.Order
             get { return price; }
             set { price = value; }
         }
-
-
     }
 }
