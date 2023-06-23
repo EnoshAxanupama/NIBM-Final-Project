@@ -9,40 +9,90 @@ namespace BixbyShop_LK.Services
 
         private readonly AppDbContext _context;
         private readonly RoleService _roleService;
+        private readonly TokenService _tokenService;
 
         public UserService()
         {
             _context = new AppDbContext();
             _roleService = new RoleService();
+            _tokenService = new TokenService();
         }
         public void Dispose()
         {
             _context.Dispose();
         }
 
-        private bool checkUser(String email)
+        // **************************************************************************************************
+        // **************************************************************************************************
+        // **************************************************************************************************
+        // **************************************************************************************************
+        // **************************************************************************************************
+        // **************************************************************************************************
+        // **************************************************************************************************
+
+        public dynamic checkAndGetUser(String email, bool getFullUser)
         {
             User user = _context.Users.Where(user => user.Email == email).FirstOrDefault();
-            if(user != null)
-                return true;
+            if (getFullUser)
+                return user;
             else
-                return false;
+            {
+                if (user != null)
+                    return true;
+                else
+                    return false;
+            }
         }
 
-        public User GetUser(String email)
+        public String signUp(String fistName, String lastName, String email, String address, String password, String pic, List<String> roles)
         {
-            return _context.Users.Where(user => user.Email == email).FirstOrDefault();
+            if(checkAndGetUser(email, false))
+            {
+                if(saveAUser(fistName, lastName, email, address, password, pic, roles) != -1)
+                {
+                    return _tokenService.tokenCreator(email, BCryptNet.HashPassword(password));
+                }
+            }
+            return null;
         }
 
-        public bool passwordMatch(String plainPassword, String email)
+        public String login(String email, String password)
         {
-           
-            return checkUser(email) == null ? false : BCryptNet.Verify(plainPassword, GetUser(email).Password);
+            User user = checkAndGetUser(email, true);
+            if (user != null)
+                if (passwordMatch(password, user))
+                    return _tokenService.tokenCreator(email, BCryptNet.HashPassword(password));
+                else
+                    return null;
+            else
+                return null;
         }
 
-        public int saveAUser(String fistName, String lastName, String email, String address, String password, String pic, List<String> roles)
+        public bool checkUserAuthMiddleWare(String token)
         {
-            if(checkUser(email))
+            return _tokenService.ValidateJwtToken(token);
+        }
+
+
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+
+        private bool passwordMatch(String plainPassword, User user)
+        {
+            return BCryptNet.Verify(plainPassword, user.Password);
+        }
+
+        private int saveAUser(String fistName, String lastName, String email, String address, String password, String pic, List<String> roles)
+        {
+            if(checkAndGetUser(email, false))
                 return -1;
             else
             {

@@ -1,6 +1,8 @@
 ﻿using BixbyShop_LK.Users_and_Roles;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using BixbyShop_LK.Models.Order;
+using BixbyShop_LK.Models.Comments;
 
 namespace BixbyShop_LK
 {
@@ -16,7 +18,29 @@ namespace BixbyShop_LK
         private String password;
         private String pic;
 
-        public ICollection<Roles> roles;
+        private ICollection<Roles> roles;
+        private ICollection<Order> orders;
+        private ICollection<CartAndOrder> cart;
+        private ICollection<Comment> comments;
+
+
+        public ICollection<Comment> Comments
+        {
+            get { return comments; }
+            set { comments = value; }
+        }
+
+        public ICollection<CartAndOrder> Cart
+        {
+            get { return cart; }
+            set { cart = value; }
+        }
+
+        public ICollection<Order> Orders
+        {
+            get { return orders; }
+            set { orders = value; }
+        }
 
         public ICollection<Roles> Roles
         {
