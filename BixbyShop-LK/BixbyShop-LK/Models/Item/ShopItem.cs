@@ -12,9 +12,8 @@ namespace BixbyShop_LK.Models.Item
         private List<String> pics;
         private int price;
 
-        private Comment comments;
-
-        public Comment Comments
+        private ICollection<Comment> comments;
+        public ICollection<Comment> Comments
         {
             get { return comments; }
             set { comments = value; }

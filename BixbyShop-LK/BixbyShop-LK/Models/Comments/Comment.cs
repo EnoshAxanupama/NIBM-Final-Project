@@ -1,4 +1,5 @@
-﻿using BixbyShop_LK.Models.Order;
+﻿using BixbyShop_LK.Models.Item;
+using BixbyShop_LK.Models.Order;
 using System.ComponentModel.DataAnnotations;
 
 namespace BixbyShop_LK.Models.Comments
@@ -12,6 +13,20 @@ namespace BixbyShop_LK.Models.Comments
         private User user;
         private long userId;
 
+        private ShopItem shopItem;
+        private long shopItemId;
+
+        public ShopItem ShopItem
+        {
+            get { return shopItem; }
+            set { shopItem = value; }
+        }
+
+        public long ShopItemId
+        {
+            get { return shopItemId; }
+            set { shopItemId = value; }
+        }
 
         public User User
         {
