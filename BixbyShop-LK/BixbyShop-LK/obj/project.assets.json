@@ -96,11 +96,11 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
-      "Microsoft.EntityFrameworkCore/7.0.7": {
+      "Microsoft.EntityFrameworkCore/7.0.8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "7.0.7",
-          "Microsoft.EntityFrameworkCore.Analyzers": "7.0.7",
+          "Microsoft.EntityFrameworkCore.Abstractions": "7.0.8",
+          "Microsoft.EntityFrameworkCore.Analyzers": "7.0.8",
           "Microsoft.Extensions.Caching.Memory": "7.0.0",
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
           "Microsoft.Extensions.Logging": "7.0.0"
@@ -119,7 +119,7 @@
           "buildTransitive/net6.0/Microsoft.EntityFrameworkCore.props": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/7.0.7": {
+      "Microsoft.EntityFrameworkCore.Abstractions/7.0.8": {
         "type": "package",
         "compile": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
@@ -132,13 +132,29 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/7.0.7": {
+      "Microsoft.EntityFrameworkCore.Analyzers/7.0.8": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/_._": {}
         },
         "runtime": {
           "lib/netstandard2.0/_._": {}
+        }
+      },
+      "Microsoft.EntityFrameworkCore.InMemory/7.0.8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.8"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/7.0.7": {
@@ -2662,10 +2678,10 @@
         "version.txt"
       ]
     },
-    "Microsoft.EntityFrameworkCore/7.0.7": {
-      "sha512": "t4rjHwogWpU1QRWbLlpw3JCbfiNd/CsolaWRykgjelQzS0yZlCoqDGZLpPwJXBag3aMuFqifoOHO3JbmSdikIA==",
+    "Microsoft.EntityFrameworkCore/7.0.8": {
+      "sha512": "J4eNwnGsaEeudWGvgEO+n9u5XYfKb/QmMjLPH/T2xUBKzuZsJ7nyNoEtNDo3DhQqyDHPxf2fDSuUwSJQFEj6JQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore/7.0.7",
+      "path": "microsoft.entityframeworkcore/7.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2673,36 +2689,50 @@
         "buildTransitive/net6.0/Microsoft.EntityFrameworkCore.props",
         "lib/net6.0/Microsoft.EntityFrameworkCore.dll",
         "lib/net6.0/Microsoft.EntityFrameworkCore.xml",
-        "microsoft.entityframeworkcore.7.0.7.nupkg.sha512",
+        "microsoft.entityframeworkcore.7.0.8.nupkg.sha512",
         "microsoft.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/7.0.7": {
-      "sha512": "TLS/inwdlTPhwxME8H+vxXRBIlsNImQZu90TETFltq6bWETAwT+GO7vqw4YQG9CuU4tIWWAm07/QPcNP2SrNUg==",
+    "Microsoft.EntityFrameworkCore.Abstractions/7.0.8": {
+      "sha512": "4+Kj43oGUHPneA/uZurt9Nj9NZt8PBV0vMI+iKOUhmHXQKCkRUzpJaRKIZ1QLy8LiEL5D3/AIRfclgokdJnINQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.abstractions/7.0.7",
+      "path": "microsoft.entityframeworkcore.abstractions/7.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
-        "microsoft.entityframeworkcore.abstractions.7.0.7.nupkg.sha512",
+        "microsoft.entityframeworkcore.abstractions.7.0.8.nupkg.sha512",
         "microsoft.entityframeworkcore.abstractions.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/7.0.7": {
-      "sha512": "Lvn49Z/fXvJSKp9CpmJ1ZYzmD51sWmELF6ZbN2Avpl7Zgm+gjGkD8fqi50X91obFbKwZGWLPVJU6F1LOMUcKMw==",
+    "Microsoft.EntityFrameworkCore.Analyzers/7.0.8": {
+      "sha512": "FSEFD1j4HerUaPyOZ0/NQjZZBkxqDSx2ZKEZXOz1aOQz7PY2f1D6ZuIBTLF8zAq11f058O2cl72GXVRMfwQ5iw==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/7.0.7",
+      "path": "microsoft.entityframeworkcore.analyzers/7.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "lib/netstandard2.0/_._",
-        "microsoft.entityframeworkcore.analyzers.7.0.7.nupkg.sha512",
+        "microsoft.entityframeworkcore.analyzers.7.0.8.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/7.0.8": {
+      "sha512": "FGJsIls82+tj7ZrbyiwBiVtEHp1quOE4PGflLR090beptkHK02yLrGoF72ZA045rYd9NR8EMoOk+pqgAafdbDw==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.inmemory/7.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "microsoft.entityframeworkcore.inmemory.7.0.8.nupkg.sha512",
+        "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/7.0.7": {
@@ -7755,7 +7785,8 @@
       "BCrypt >= 1.0.0",
       "BCrypt.Net-Next >= 4.0.3",
       "EntityFramework >= 6.4.4",
-      "Microsoft.EntityFrameworkCore >= 7.0.7",
+      "Microsoft.EntityFrameworkCore >= 7.0.8",
+      "Microsoft.EntityFrameworkCore.InMemory >= 7.0.8",
       "Microsoft.EntityFrameworkCore.Relational >= 7.0.7",
       "NHibernate >= 5.4.2",
       "SendGrid >= 9.28.1",
@@ -7817,7 +7848,11 @@
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
-            "version": "[7.0.7, )"
+            "version": "[7.0.8, )"
+          },
+          "Microsoft.EntityFrameworkCore.InMemory": {
+            "target": "Package",
+            "version": "[7.0.8, )"
           },
           "Microsoft.EntityFrameworkCore.Relational": {
             "target": "Package",

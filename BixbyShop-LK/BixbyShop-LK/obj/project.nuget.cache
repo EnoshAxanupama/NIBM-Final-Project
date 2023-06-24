@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+8g0uamZ8WOWEkMfAlbDezWZUvmf1O7frurka9qMfp1JmzeXO/hZ/Mf6HF5htCsdEcP6Vzgm/tiquVjLSrWJ/w==",
+  "dgSpecHash": "huKliS3tY8HzznHrjUnCqQR07z0XsWd8GPsNwWfr3BpoXSvQRSOQ8wARx+fveYzKMqPZuhETQr/6x4zkLvmumw==",
   "success": true,
   "projectFilePath": "C:\\NIBM Group Project GUI\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj",
   "expectedPackageFiles": [
@@ -10,9 +10,10 @@
     "C:\\Users\\MSI\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\MSI\\.nuget\\packages\\iesi.collections\\4.0.4\\iesi.collections.4.0.4.nupkg.sha512",
     "C:\\Users\\MSI\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
-    "C:\\Users\\MSI\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.7\\microsoft.entityframeworkcore.7.0.7.nupkg.sha512",
-    "C:\\Users\\MSI\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.7\\microsoft.entityframeworkcore.abstractions.7.0.7.nupkg.sha512",
-    "C:\\Users\\MSI\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.7\\microsoft.entityframeworkcore.analyzers.7.0.7.nupkg.sha512",
+    "C:\\Users\\MSI\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.8\\microsoft.entityframeworkcore.7.0.8.nupkg.sha512",
+    "C:\\Users\\MSI\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.8\\microsoft.entityframeworkcore.abstractions.7.0.8.nupkg.sha512",
+    "C:\\Users\\MSI\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.8\\microsoft.entityframeworkcore.analyzers.7.0.8.nupkg.sha512",
+    "C:\\Users\\MSI\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.8\\microsoft.entityframeworkcore.inmemory.7.0.8.nupkg.sha512",
     "C:\\Users\\MSI\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.7\\microsoft.entityframeworkcore.relational.7.0.7.nupkg.sha512",
     "C:\\Users\\MSI\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\MSI\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
