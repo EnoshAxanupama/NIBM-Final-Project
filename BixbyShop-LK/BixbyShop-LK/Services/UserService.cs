@@ -10,25 +10,55 @@ namespace BixbyShop_LK.Services
         private readonly AppDbContext _context;
         private readonly RoleService _roleService;
         private readonly TokenService _tokenService;
+        private readonly BixbyConfig _bixbyConfig;
+        private readonly EmailService _emailService;
 
         public UserService()
         {
             _context = new AppDbContext();
             _roleService = new RoleService();
             _tokenService = new TokenService();
+            _bixbyConfig = new BixbyConfig();
         }
         public void Dispose()
         {
             _context.Dispose();
         }
 
-        // **************************************************************************************************
-        // **************************************************************************************************
-        // **************************************************************************************************
-        // **************************************************************************************************
-        // **************************************************************************************************
-        // **************************************************************************************************
-        // **************************************************************************************************
+        public int ResetThePassword(String oldPassword,String password, String email)
+        {
+            User user = checkAndGetUser(email, true);
+            if (user.Password == BCryptNet.HashPassword(oldPassword))
+            {
+                user.Password = BCryptNet.HashPassword(password);
+                return UpdateUser(user);
+            }
+            return -1;
+        }
+
+        public int EmailActionInUser(String? password, String? email, String code, int i)
+        {
+            if(i == 0)
+                return _bixbyConfig.EmailVerificationValidation_TakeTheAction(password, email, code, ResetThePasswordViaEmail);
+            else if (i == 1)
+                return _bixbyConfig.EmailVerificationValidation_TakeTheAction(password, email, code, ResetThePasswordViaEmail);
+            else
+                return -1;
+        }
+
+        private int ResetThePasswordViaEmail(String? password, String? email)
+        {
+            User user = checkAndGetUser(email, true);
+            user.Password = BCryptNet.HashPassword(password);
+            return UpdateUser(user);
+        }
+
+        private int EmailVerifyViaEmail(String? password, String? email)
+        {
+            User user = checkAndGetUser(email, true);
+            user.EmailVerify = true;
+            return UpdateUser(user);
+        }
 
         public dynamic checkAndGetUser(String email, bool getFullUser)
         {
@@ -44,12 +74,24 @@ namespace BixbyShop_LK.Services
             }
         }
 
+        public int requestPasswordReset(String email)
+        {
+            User user = checkAndGetUser(email, true);
+            if(user != null)
+            {
+                _emailService.SendEmail(email, "Reset Tour Password 😊✌️✌️💥", 0);
+                return 0;
+            }
+            return -1;
+        }
+
         public String signUp(String fistName, String lastName, String email, String address, String password, String pic, List<String> roles)
         {
             if(checkAndGetUser(email, false))
             {
                 if(saveAUser(fistName, lastName, email, address, password, pic, roles) != -1)
                 {
+                     _emailService.SendEmail(email, "VerifyYourEmail 😊✌️✌️💥", 0);
                     return _tokenService.tokenCreator(email, BCryptNet.HashPassword(password));
                 }
             }
@@ -59,7 +101,7 @@ namespace BixbyShop_LK.Services
         public String login(String email, String password)
         {
             User user = checkAndGetUser(email, true);
-            if (user != null)
+            if (user != null && user.EmailVerify)
                 if (passwordMatch(password, user))
                     return _tokenService.tokenCreator(email, BCryptNet.HashPassword(password));
                 else
@@ -73,17 +115,17 @@ namespace BixbyShop_LK.Services
             return _tokenService.ValidateJwtToken(token);
         }
 
+        public int UpdateUser(User user)
+        {
+            _context.Users.Update(user);
+            return _context.SaveChanges();
+        }
 
-        // ===========================================================================================================
-        // ===========================================================================================================
-        // ===========================================================================================================
-        // ===========================================================================================================
-        // ===========================================================================================================
-        // ===========================================================================================================
-        // ===========================================================================================================
-        // ===========================================================================================================
-        // ===========================================================================================================
-        // ===========================================================================================================
+        public void DeleteUser(User user)
+        {
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+        }
 
         private bool passwordMatch(String plainPassword, User user)
         {
@@ -96,7 +138,7 @@ namespace BixbyShop_LK.Services
                 return -1;
             else
             {
-                User user = new User { FirstName = fistName, LastName = lastName, Email = email, Address = address, Pic = pic };
+                User user = new User { FirstName = fistName, LastName = lastName, Email = email, Address = address, Pic = pic, EmailVerify = false };
                 user.Password = BCryptNet.HashPassword(password);
 
                 Roles[] userRoles = { };

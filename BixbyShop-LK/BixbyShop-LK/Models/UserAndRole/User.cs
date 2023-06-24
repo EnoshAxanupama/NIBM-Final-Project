@@ -17,6 +17,7 @@ namespace BixbyShop_LK
         private string address;
         private string password;
         private string pic;
+        private bool emailVerify;
 
         private ICollection<Roles> roles;
         private ICollection<Order> orders;
@@ -71,6 +72,12 @@ namespace BixbyShop_LK
         {
             get { return pic; }
             set { pic = value; }
+        }
+
+        public bool EmailVerify
+        {
+            get { return emailVerify; }
+            set { emailVerify = value; }
         }
 
         public ICollection<Roles> Roles
