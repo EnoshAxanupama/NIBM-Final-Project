@@ -1,7 +1,9 @@
-﻿using BixbyShop_LK.Users_and_Roles;
+﻿using BixbyShop_LK.Config.DI;
+using BixbyShop_LK.Users_and_Roles;
 
 namespace BixbyShop_LK.Services
 {
+    [Component]
     public class AuthorityService
     {
         private readonly AppDbContext _dbContext;

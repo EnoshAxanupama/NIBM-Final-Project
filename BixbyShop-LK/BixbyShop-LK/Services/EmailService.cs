@@ -3,9 +3,11 @@ using SendGrid;
 using System.Text.RegularExpressions;
 using BixbyShop_LK.Config;
 using System.Net;
+using BixbyShop_LK.Config.DI;
 
 namespace BixbyShop_LK.Services
 {
+    [Component]
     public class EmailService
     {
         private readonly string _apiKey;

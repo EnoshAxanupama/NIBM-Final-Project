@@ -2,10 +2,12 @@
 using System.Security.Claims;
 using System.Text;
 using BixbyShop_LK.Config;
+using BixbyShop_LK.Config.DI;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BixbyShop_LK.Services
 {
+    [Component]
     public class TokenService
     {
 

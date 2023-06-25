@@ -1,5 +1,8 @@
-﻿namespace BixbyShop_LK.Config
+﻿using BixbyShop_LK.Config.DI;
+
+namespace BixbyShop_LK.Config
 {
+    [Component]
     public class MapValue
     {
         public string Value { get; set; }
@@ -7,6 +10,7 @@
         public bool IsExpired => DateTime.Now > ExpirationTime;
     }
 
+    [Component]
     public class MapService
     {
         private Thread backgroundThread;
@@ -78,6 +82,7 @@
         }
     }
 
+    [Component]
     public class BixbyConfig
     {
         public delegate int CallbackDelegate(String? password, String? email);

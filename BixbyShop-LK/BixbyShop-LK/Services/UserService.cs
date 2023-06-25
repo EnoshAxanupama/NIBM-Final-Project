@@ -1,9 +1,11 @@
 ﻿using BixbyShop_LK.Config;
+using BixbyShop_LK.Config.DI;
 using BixbyShop_LK.Users_and_Roles;
 using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace BixbyShop_LK.Services
 {
+    [Component]
     public class UserService
     {
 
@@ -158,6 +160,7 @@ namespace BixbyShop_LK.Services
             }
         }
 
+        [Component]
         public class RoleService {
             private readonly AppDbContext _context;
 
@@ -185,6 +188,7 @@ namespace BixbyShop_LK.Services
     
         }
 
+        [Component]
         public class AuthorityService
         {
             private readonly AppDbContext _context;

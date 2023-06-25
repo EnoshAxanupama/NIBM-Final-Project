@@ -1,4 +1,5 @@
-﻿using BixbyShop_LK.Models.Comments;
+﻿using BixbyShop_LK.Config.DI;
+using BixbyShop_LK.Models.Comments;
 using BixbyShop_LK.Models.Item;
 using BixbyShop_LK.Models.Order;
 using BixbyShop_LK.Users_and_Roles;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BixbyShop_LK.Config
 {
+    [Component]
     public class MyDbContext : DbContext
     {
         public MyDbContext(DbContextOptions<MyDbContext> options): base(options)

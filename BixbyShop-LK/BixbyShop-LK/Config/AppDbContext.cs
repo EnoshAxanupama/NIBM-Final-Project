@@ -1,13 +1,14 @@
-﻿using BixbyShop_LK.Models.Comments;
+﻿using BixbyShop_LK.Config.DI;
+using BixbyShop_LK.Models.Comments;
 using BixbyShop_LK.Models.Item;
 using BixbyShop_LK.Models.Order;
 using BixbyShop_LK.Users_and_Roles;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace BixbyShop_LK
 {
-   public class AppDbContext : DbContext
+    [Component]
+    public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Roles> Roles { get; set; }
