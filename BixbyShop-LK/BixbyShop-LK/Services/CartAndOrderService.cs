@@ -1,44 +1,44 @@
-﻿using BixbyShop_LK.Config.DI;
-using BixbyShop_LK.Models.Order;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using System.Collections.Generic;
 
-namespace BixbyShop_LK.Services
+namespace BixbyShop_LK.Models.Order.Services
 {
-    [Component]
     public class CartAndOrderService
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IMongoCollection<CartAndOrder> cartAndOrderCollection;
 
-        public CartAndOrderService(AppDbContext dbContext)
+        public CartAndOrderService(IMongoDatabase database)
         {
-            _dbContext = dbContext;
+            cartAndOrderCollection = database.GetCollection<CartAndOrder>("cartAndOrders");
         }
 
         public List<CartAndOrder> GetAllCartAndOrders()
         {
-            return _dbContext.CartAndOrders.ToList();
+            return cartAndOrderCollection.Find(_ => true).ToList();
         }
 
-        public CartAndOrder GetCartAndOrderById(long id)
+        public CartAndOrder GetCartAndOrderById(string cartAndOrderId)
         {
-            return _dbContext.CartAndOrders.FirstOrDefault(co => co.Id == id);
+            var objectId = new ObjectId(cartAndOrderId);
+            return cartAndOrderCollection.Find(cartAndOrder => cartAndOrder.Id == objectId).FirstOrDefault();
         }
 
         public void CreateCartAndOrder(CartAndOrder cartAndOrder)
         {
-            _dbContext.CartAndOrders.Add(cartAndOrder);
-            _dbContext.SaveChanges();
+            cartAndOrderCollection.InsertOne(cartAndOrder);
         }
 
-        public void UpdateCartAndOrder(CartAndOrder cartAndOrder)
+        public void UpdateCartAndOrder(string cartAndOrderId, CartAndOrder updatedCartAndOrder)
         {
-            _dbContext.CartAndOrders.Update(cartAndOrder);
-            _dbContext.SaveChanges();
+            var objectId = new ObjectId(cartAndOrderId);
+            cartAndOrderCollection.ReplaceOne(cartAndOrder => cartAndOrder.Id == objectId, updatedCartAndOrder);
         }
 
-        public void DeleteCartAndOrder(CartAndOrder cartAndOrder)
+        public void DeleteCartAndOrder(string cartAndOrderId)
         {
-            _dbContext.CartAndOrders.Remove(cartAndOrder);
-            _dbContext.SaveChanges();
+            var objectId = new ObjectId(cartAndOrderId);
+            cartAndOrderCollection.DeleteOne(cartAndOrder => cartAndOrder.Id == objectId);
         }
     }
 }

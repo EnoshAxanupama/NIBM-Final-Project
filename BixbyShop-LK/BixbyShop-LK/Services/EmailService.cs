@@ -3,21 +3,17 @@ using SendGrid;
 using System.Text.RegularExpressions;
 using BixbyShop_LK.Config;
 using System.Net;
-using BixbyShop_LK.Config.DI;
 
 namespace BixbyShop_LK.Services
 {
-    [Component]
     public class EmailService
     {
         private readonly string _apiKey;
-        private readonly EnvironmentService _environmentService;
         private readonly string fromEmail;
         public EmailService()
         {
-            _environmentService = new EnvironmentService();
-            _apiKey = _environmentService.getEnvironmentVariable("SendGridAPIKey");
-            fromEmail = _environmentService.getEnvironmentVariable("SenderEmail");
+            _apiKey = EnvironmentService.getEnvironmentVariable("SendGridAPIKey");
+            fromEmail = EnvironmentService.getEnvironmentVariable("SenderEmail");
         }
 
         private string FormatHtml(string input, Func<string, string> valueProvider)

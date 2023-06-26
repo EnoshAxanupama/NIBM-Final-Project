@@ -1,38 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System.Text;
 
 namespace BixbyShop_LK.Users_and_Roles
 {
     public class Roles
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
+        [BsonId]
+        public ObjectId Id { get; set; }
 
-        private string role;
+        public String Role { get; set; }
 
-        public string Role
-        {
-            get { return role; }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentException("Role cannot be null or empty.");
-                }
-                role = value.Trim();
-            }
-        }
-
-        public ICollection<Authority> Authorities { get; set; }
-        public ICollection<User> Users { get; set; }
-
-        public Roles()
-        {
-            Authorities = new List<Authority>();
-            Users = new List<User>();
-        }
+        public Authority[] Authorities { get; set; }
+        public User[] Users { get; set; }
 
         public override string ToString()
         {
@@ -41,7 +21,7 @@ namespace BixbyShop_LK.Users_and_Roles
             sb.AppendLine($"Role: {Role}");
             sb.AppendLine("Authorities:");
 
-            if (Authorities != null && Authorities.Count > 0)
+            if (Authorities != null && Authorities.Length > 0)
             {
                 foreach (Authority authority in Authorities)
                 {
@@ -50,7 +30,7 @@ namespace BixbyShop_LK.Users_and_Roles
             }
 
             sb.AppendLine("Users:");
-            if (Users != null && Users.Count > 0)
+            if (Users != null && Users.Length > 0)
             {
                 foreach (User user in Users)
                 {

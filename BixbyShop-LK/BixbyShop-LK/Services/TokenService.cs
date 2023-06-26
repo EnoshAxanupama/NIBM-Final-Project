@@ -2,28 +2,22 @@
 using System.Security.Claims;
 using System.Text;
 using BixbyShop_LK.Config;
-using BixbyShop_LK.Config.DI;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BixbyShop_LK.Services
 {
-    [Component]
     public class TokenService
     {
 
-        private readonly EnvironmentService _environmentService;
-        private readonly UserService _userService;
         private readonly string secretKey;
         private readonly string issuer;
         private readonly string audience;
 
         public TokenService()
         {
-            _environmentService = new EnvironmentService();
-            _userService = new UserService();
-            secretKey = _environmentService.getEnvironmentVariable("your-secret-key");
-            issuer = _environmentService.getEnvironmentVariable("your-issuer");
-            audience = _environmentService.getEnvironmentVariable("your-audience");
+            secretKey = EnvironmentService.getEnvironmentVariable("your-secret-key");
+            issuer = EnvironmentService.getEnvironmentVariable("your-issuer");
+            audience = EnvironmentService.getEnvironmentVariable("your-audience");
         }
 
       
@@ -61,11 +55,12 @@ namespace BixbyShop_LK.Services
             var email = claims.FirstOrDefault(c => c.Type == "email");
             var password = claims.FirstOrDefault(c => c.Type == "password");
 
-            User user = _userService.checkAndGetUser(email.ToString(), true);
+            /*User user = _userService.checkAndGetUser(email.ToString(), true);
             if (user != null && user.EmailVerify)
                 return user.Password == password.ToString();
             else
-                return false;
+                return false;*/
+            return false;
         }
 
         public String tokenCreator(String email, String password)

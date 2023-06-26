@@ -1,44 +1,44 @@
-﻿using BixbyShop_LK.Config.DI;
-using BixbyShop_LK.Models.Item;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using System.Collections.Generic;
 
-namespace BixbyShop_LK.Services
+namespace BixbyShop_LK.Models.Item.Services
 {
-    [Component]
     public class ShopItemService
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IMongoCollection<ShopItem> shopItemCollection;
 
-        public ShopItemService(AppDbContext dbContext)
+        public ShopItemService(IMongoDatabase database)
         {
-            _dbContext = dbContext;
+            shopItemCollection = database.GetCollection<ShopItem>("shopItems");
         }
 
         public List<ShopItem> GetAllShopItems()
         {
-            return _dbContext.ShopItems.ToList();
+            return shopItemCollection.Find(_ => true).ToList();
         }
 
-        public ShopItem GetShopItemById(long id)
+        public ShopItem GetShopItemById(string shopItemId)
         {
-            return _dbContext.ShopItems.FirstOrDefault(si => si.Id == id);
+            var objectId = new ObjectId(shopItemId);
+            return shopItemCollection.Find(shopItem => shopItem.Id == objectId).FirstOrDefault();
         }
 
         public void CreateShopItem(ShopItem shopItem)
         {
-            _dbContext.ShopItems.Add(shopItem);
-            _dbContext.SaveChanges();
+            shopItemCollection.InsertOne(shopItem);
         }
 
-        public void UpdateShopItem(ShopItem shopItem)
+        public void UpdateShopItem(string shopItemId, ShopItem updatedShopItem)
         {
-            _dbContext.ShopItems.Update(shopItem);
-            _dbContext.SaveChanges();
+            var objectId = new ObjectId(shopItemId);
+            shopItemCollection.ReplaceOne(shopItem => shopItem.Id == objectId, updatedShopItem);
         }
 
-        public void DeleteShopItem(ShopItem shopItem)
+        public void DeleteShopItem(string shopItemId)
         {
-            _dbContext.ShopItems.Remove(shopItem);
-            _dbContext.SaveChanges();
+            var objectId = new ObjectId(shopItemId);
+            shopItemCollection.DeleteOne(shopItem => shopItem.Id == objectId);
         }
     }
 }

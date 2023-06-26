@@ -1,6 +1,4 @@
-C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\bin\Debug\net6.0\BixbyShop-LK.dll.config
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\bin\Debug\net6.0\BixbyShop-LK.deps.json
-C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\bin\Debug\net6.0\BixbyShop-LK.runtimeconfig.json
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\bin\Debug\net6.0\BixbyShop-LK.dll
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\bin\Debug\net6.0\BixbyShop-LK.pdb
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.csproj.AssemblyReference.cache
@@ -11,5 +9,4 @@ C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-L
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.dll
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\refint\BixbyShop-LK.dll
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.pdb
-C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.genruntimeconfig.cache
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\ref\BixbyShop-LK.dll

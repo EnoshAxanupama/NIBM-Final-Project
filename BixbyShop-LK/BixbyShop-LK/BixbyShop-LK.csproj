@@ -10,11 +10,8 @@
   <ItemGroup>
     <PackageReference Include="BCrypt" Version="1.0.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.7" />
-    <PackageReference Include="NHibernate" Version="5.4.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.20.0" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.20.0" />
     <PackageReference Include="SendGrid" Version="9.28.1" />
     <PackageReference Include="ServiceBase" Version="6.0.2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />

@@ -1,44 +1,44 @@
-﻿using BixbyShop_LK.Config.DI;
-using BixbyShop_LK.Models.Comments;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using System.Collections.Generic;
 
-namespace BixbyShop_LK.Services
+namespace BixbyShop_LK.Models.Comments.Services
 {
-    [Component]
     public class CommentService
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IMongoCollection<Comment> commentCollection;
 
-        public CommentService(AppDbContext dbContext)
+        public CommentService(IMongoDatabase database)
         {
-            _dbContext = dbContext;
+            commentCollection = database.GetCollection<Comment>("comments");
         }
 
         public List<Comment> GetAllComments()
         {
-            return _dbContext.Comments.ToList();
+            return commentCollection.Find(_ => true).ToList();
         }
 
-        public Comment GetCommentById(long id)
+        public Comment GetCommentById(string commentId)
         {
-            return _dbContext.Comments.FirstOrDefault(c => c.Id == id);
+            var objectId = new ObjectId(commentId);
+            return commentCollection.Find(comment => comment.Id == objectId).FirstOrDefault();
         }
 
         public void CreateComment(Comment comment)
         {
-            _dbContext.Comments.Add(comment);
-            _dbContext.SaveChanges();
+            commentCollection.InsertOne(comment);
         }
 
-        public void UpdateComment(Comment comment)
+        public void UpdateComment(string commentId, Comment updatedComment)
         {
-            _dbContext.Comments.Update(comment);
-            _dbContext.SaveChanges();
+            var objectId = new ObjectId(commentId);
+            commentCollection.ReplaceOne(comment => comment.Id == objectId, updatedComment);
         }
 
-        public void DeleteComment(Comment comment)
+        public void DeleteComment(string commentId)
         {
-            _dbContext.Comments.Remove(comment);
-            _dbContext.SaveChanges();
+            var objectId = new ObjectId(commentId);
+            commentCollection.DeleteOne(comment => comment.Id == objectId);
         }
     }
 }

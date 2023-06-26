@@ -1,16 +1,13 @@
-﻿using BixbyShop_LK.Config.DI;
-
-namespace BixbyShop_LK.Config
+﻿namespace BixbyShop_LK.Config
 {
-    [Component]
-    public class EnvironmentService
+    public static class EnvironmentService
     {
-        public void setEnvironmentVariable(String key, String value)
+        public static void setEnvironmentVariable(String key, String value)
         {
             Environment.SetEnvironmentVariable(key, value, EnvironmentVariableTarget.Process);
         }
 
-        public String getEnvironmentVariable(String key)
+        public static String getEnvironmentVariable(String key)
         {
             return Environment.GetEnvironmentVariable(key);
         }

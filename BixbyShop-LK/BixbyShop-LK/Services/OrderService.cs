@@ -1,44 +1,43 @@
-﻿using BixbyShop_LK.Config.DI;
-using BixbyShop_LK.Models.Order;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 
-namespace BixbyShop_LK.Services
+namespace BixbyShop_LK.Models.Order.Services
 {
-    [Component]
     public class OrderService
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IMongoCollection<Order> orderCollection;
 
-        public OrderService(AppDbContext dbContext)
+        public OrderService(IMongoDatabase database)
         {
-            _dbContext = dbContext;
+            orderCollection = database.GetCollection<Order>("orders");
         }
 
         public List<Order> GetAllOrders()
         {
-            return _dbContext.Orders.ToList();
+            return orderCollection.Find(_ => true).ToList();
         }
 
-        public Order GetOrderById(long id)
+        public Order GetOrderById(string orderId)
         {
-            return _dbContext.Orders.FirstOrDefault(o => o.Id == id);
+            var objectId = new ObjectId(orderId);
+            return orderCollection.Find(order => order.Id == objectId).FirstOrDefault();
         }
 
         public void CreateOrder(Order order)
         {
-            _dbContext.Orders.Add(order);
-            _dbContext.SaveChanges();
+            orderCollection.InsertOne(order);
         }
 
-        public void UpdateOrder(Order order)
+        public void UpdateOrder(string orderId, Order updatedOrder)
         {
-            _dbContext.Orders.Update(order);
-            _dbContext.SaveChanges();
+            var objectId = new ObjectId(orderId);
+            orderCollection.ReplaceOne(order => order.Id == objectId, updatedOrder);
         }
 
-        public void DeleteOrder(Order order)
+        public void DeleteOrder(string orderId)
         {
-            _dbContext.Orders.Remove(order);
-            _dbContext.SaveChanges();
+            var objectId = new ObjectId(orderId);
+            orderCollection.DeleteOne(order => order.Id == objectId);
         }
     }
 }
