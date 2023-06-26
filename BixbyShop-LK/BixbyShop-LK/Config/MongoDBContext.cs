@@ -20,12 +20,12 @@ namespace BixbyShop_LK.Config
         {
             return database.GetCollection<T>(collectionName);
         }
-        public IMongoCollection<User> Users => database.GetCollection<User>("users");
-        public IMongoCollection<Roles> Roles => database.GetCollection<Roles>("roles");
-        public IMongoCollection<Authority> Authorities => database.GetCollection<Authority>("authorities");
-        public IMongoCollection<Order> Orders => database.GetCollection<Order>("orders");
-        public IMongoCollection<CartAndOrder> CartAndOrders => database.GetCollection<CartAndOrder>("cartandorders");
-        public IMongoCollection<ShopItem> ShopItems => database.GetCollection<ShopItem>("shopitems");
-        public IMongoCollection<Comment> Comments => database.GetCollection<Comment>("comments");
+        public IMongoCollection<User> Users => database.GetCollection<User>("Users");
+        public IMongoCollection<Roles> Roles => database.GetCollection<Roles>("Roles");
+        public IMongoCollection<Authority> Authorities => database.GetCollection<Authority>("Authorities");
+        public IMongoCollection<Order> Orders => database.GetCollection<Order>("Orders");
+        public IMongoCollection<CartAndOrder> CartAndOrders => database.GetCollection<CartAndOrder>("Cartandorders");
+        public IMongoCollection<ShopItem> ShopItems => database.GetCollection<ShopItem>("Shopitems");
+        public IMongoCollection<Comment> Comments => database.GetCollection<Comment>("Comments");
     }
 }
