@@ -1,10 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BixbyShop_LK.Users_and_Roles
 {
     public class Roles
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        private long id;
+
         private string role;
 
         private ICollection<Authority> authorities;
@@ -15,7 +19,11 @@ namespace BixbyShop_LK.Users_and_Roles
             authorities = new List<Authority>();
             users = new List<User>();
         }
-
+        public long Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
         public string Role
         {
             get { return role; }

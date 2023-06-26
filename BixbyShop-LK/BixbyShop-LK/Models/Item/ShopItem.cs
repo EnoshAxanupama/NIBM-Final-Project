@@ -9,7 +9,6 @@ namespace BixbyShop_LK.Models.Item
         private long id;
         private string name;
         private string description;
-        private List<string> pics;
         private int price;
 
         private ICollection<Comment> comments;
@@ -36,13 +35,6 @@ namespace BixbyShop_LK.Models.Item
             get { return description; }
             set { description = value; }
         }
-
-        public List<string> Pics
-        {
-            get { return pics; }
-            set { pics = value; }
-        }
-
         public int Price
         {
             get { return price; }
