@@ -9,6 +9,9 @@ C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\EntityFramework.SqlServer.dll
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\EntityFramework.dll
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\Iesi.Collections.dll
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\MetroFramework.Design.dll
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\MetroFramework.Fonts.dll
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\MetroFramework.dll
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.dll
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.InMemory.dll
@@ -60,7 +63,7 @@ C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\BixbyShop-LK.pdb
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\BixbyShop-LK.dll.config
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\obj\Debug\net6.0-windows\BixbyShopApp-GUI.csproj.AssemblyReference.cache
-C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.Form1.resources
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.UserForm.resources
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\obj\Debug\net6.0-windows\BixbyShopApp-GUI.csproj.GenerateResource.cache
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\obj\Debug\net6.0-windows\BixbyShopApp-GUI.GeneratedMSBuildEditorConfig.editorconfig
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\obj\Debug\net6.0-windows\BixbyShopApp-GUI.AssemblyInfoInputs.cache
@@ -72,6 +75,3 @@ C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\obj\Debug\net6.0-windows
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\obj\Debug\net6.0-windows\BixbyShopApp-GUI.pdb
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\obj\Debug\net6.0-windows\BixbyShopApp-GUI.genruntimeconfig.cache
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\obj\Debug\net6.0-windows\ref\BixbyShopApp-GUI.dll
-C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\MetroFramework.Design.dll
-C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\MetroFramework.Fonts.dll
-C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp-GUI\bin\Debug\net6.0-windows\MetroFramework.dll

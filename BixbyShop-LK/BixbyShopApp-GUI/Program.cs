@@ -56,7 +56,7 @@ namespace BixbyShopApp_GUI
 
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new UserForm());
         }
     }
 }
