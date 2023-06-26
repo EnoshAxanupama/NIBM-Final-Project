@@ -18,6 +18,11 @@ namespace BixbyShop_LK
         public DbSet<CartAndOrder> CartAndOrders { get; set; }
         public DbSet<Order> Orders { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseInMemoryDatabase("Bixby_ShopAPP_InMemoryDb");
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()

@@ -12,7 +12,7 @@ namespace BixbyShop_LK_GU_APP
 {
     public partial class DashBoard : MetroFramework.Forms.MetroForm
     {
-        public DashBoard()
+        public DashBoard(String token)
         {
             InitializeComponent();
         }
