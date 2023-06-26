@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace BixbyShop_LK.Users_and_Roles
 {
@@ -7,39 +8,57 @@ namespace BixbyShop_LK.Users_and_Roles
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        private long id;
+        public long Id { get; set; }
 
         private string role;
 
-        private ICollection<Authority> authorities;
-        private ICollection<User> users;
-
-        public Roles()
-        {
-            authorities = new List<Authority>();
-            users = new List<User>();
-        }
-        public long Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
         public string Role
         {
             get { return role; }
-            set { role = value?.Trim(); }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Role cannot be null or empty.");
+                }
+                role = value.Trim();
+            }
         }
 
-        public ICollection<Authority> Authorities
+        public ICollection<Authority> Authorities { get; set; }
+        public ICollection<User> Users { get; set; }
+
+        public Roles()
         {
-            get { return authorities; }
-            set { authorities = value; }
+            Authorities = new List<Authority>();
+            Users = new List<User>();
         }
 
-        public ICollection<User> Users
+        public override string ToString()
         {
-            get { return users; }
-            set { users = value; }
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Role ID: {Id}");
+            sb.AppendLine($"Role: {Role}");
+            sb.AppendLine("Authorities:");
+
+            if (Authorities != null && Authorities.Count > 0)
+            {
+                foreach (Authority authority in Authorities)
+                {
+                    sb.AppendLine($"- {authority.Name}");
+                }
+            }
+
+            sb.AppendLine("Users:");
+            if (Users != null && Users.Count > 0)
+            {
+                foreach (User user in Users)
+                {
+                    sb.AppendLine($"- {user.Email}");
+                }
+            }
+
+            return sb.ToString();
         }
     }
 }

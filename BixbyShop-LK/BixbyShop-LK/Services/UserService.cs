@@ -1,6 +1,7 @@
 ﻿using BixbyShop_LK.Config;
 using BixbyShop_LK.Config.DI;
 using BixbyShop_LK.Users_and_Roles;
+using System.Data;
 using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace BixbyShop_LK.Services
@@ -143,7 +144,7 @@ namespace BixbyShop_LK.Services
                 User user = new User { FirstName = fistName, LastName = lastName, Email = email, Address = address, Pic = pic, EmailVerify = false };
                 user.Password = BCryptNet.HashPassword(password);
 
-                Roles[] userRoles = { };
+                List<Roles> userRoles = new List<Roles>();
                 for (int i = 0; i < roles.Count; i++)
                 {
                     Roles role = _roleService.GetRoles(roles[i]);
@@ -162,6 +163,7 @@ namespace BixbyShop_LK.Services
 
         [Component]
         public class RoleService {
+
             private readonly AppDbContext _context;
 
             public RoleService()
@@ -185,7 +187,34 @@ namespace BixbyShop_LK.Services
                 }
                 return -1;
             }
-    
+            public List<Roles> GetAllRoles()
+            {
+                return _context.Roles.ToList();
+            }
+
+            public Roles GetRolesById(string role)
+            {
+                return _context.Roles.FirstOrDefault(r => r.Role == role);
+            }
+
+            public void CreateRoles(Roles roles)
+            {
+                _context.Roles.Add(roles);
+                _context.SaveChanges();
+            }
+
+            public void UpdateRoles(Roles role)
+            {
+                _context.Roles.Update(role);
+                _context.SaveChanges();
+            }
+
+            public void DeleteRoles(Roles roles)
+            {
+                _context.Roles.Remove(roles);
+                _context.SaveChanges();
+            }
+
         }
 
         [Component]
@@ -204,19 +233,50 @@ namespace BixbyShop_LK.Services
 
             public Authority GetAuthority(String authority) => _context.Authorities.Where(a=> a.Name == authority).FirstOrDefault();
 
-            public int saveOneAuthorityAction(String name, ICollection<Roles> roles)
+            public Authority saveOneAuthorityAction(String name, ICollection<Roles>? roles)
             {
-                if(_context.Authorities.Find(name) == null)
+                if(GetAuthorityByName(name) == null)
                 {
-                    Authority authority = new Authority();
-                    authority.Name = name;
-                    authority.Roles = roles;
+                    Authority authority = new Authority { 
+                        Name = name,
+                        Roles = roles
+                    };
 
                     _context.Authorities.Add(authority);
 
-                    return _context.SaveChanges();
+                    _context.SaveChanges();
+
+                    return GetAuthorityByName(name);
                 }
-                return -1;
+                return null;
+            }
+
+            public List<Authority> GetAllAuthorities()
+            {
+                return _context.Authorities.ToList();
+            }
+
+            public Authority GetAuthorityByName(string name)
+            {
+                return _context.Authorities.FirstOrDefault(a => a.Name == name);
+            }
+
+            public void CreateAuthority(Authority authority)
+            {
+                _context.Authorities.Add(authority);
+                _context.SaveChanges();
+            }
+
+            public void UpdateAuthority(Authority authority)
+            {
+                _context.Authorities.Update(authority);
+                _context.SaveChanges();
+            }
+
+            public void DeleteAuthority(Authority authority)
+            {
+                _context.Authorities.Remove(authority);
+                _context.SaveChanges();
             }
         }
 

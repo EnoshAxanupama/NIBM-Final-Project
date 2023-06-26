@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 
 namespace BixbyShop_LK.Users_and_Roles
 {
@@ -24,13 +25,25 @@ namespace BixbyShop_LK.Users_and_Roles
         public string Name
         {
             get { return name; }
-            set { name = value?.Trim(); }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Role cannot be null or empty.");
+                }
+                name = value.Trim();
+            }
         }
 
         public ICollection<Roles> Roles
         {
             get { return roles; }
             set { roles = value; }
+        }
+
+        public override string ToString()
+        {
+            return $"Authority ID: {Id}, Name: {Name}";
         }
     }
 }
