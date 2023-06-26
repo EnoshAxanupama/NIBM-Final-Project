@@ -2,28 +2,25 @@
 using System.Security.Claims;
 using System.Text;
 using BixbyShop_LK.Config;
-using BixbyShop_LK.Config.DI;
+using BixbyShop_LK.Services.UserService;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BixbyShop_LK.Services
 {
-    [Component]
     public class TokenService
     {
 
-        private readonly EnvironmentService _environmentService;
-        private readonly UserService _userService;
         private readonly string secretKey;
         private readonly string issuer;
         private readonly string audience;
+        private readonly AppDbContext _context;
 
         public TokenService()
         {
-            _environmentService = new EnvironmentService();
-            _userService = new UserService();
-            secretKey = _environmentService.getEnvironmentVariable("your-secret-key");
-            issuer = _environmentService.getEnvironmentVariable("your-issuer");
-            audience = _environmentService.getEnvironmentVariable("your-audience");
+            _context = new AppDbContext();
+            secretKey = EnvironmentService.getEnvironmentVariable("your-secret-key");
+            issuer = EnvironmentService.getEnvironmentVariable("your-issuer");
+            audience = EnvironmentService.getEnvironmentVariable("your-audience");
         }
 
       
@@ -61,7 +58,7 @@ namespace BixbyShop_LK.Services
             var email = claims.FirstOrDefault(c => c.Type == "email");
             var password = claims.FirstOrDefault(c => c.Type == "password");
 
-            User user = _userService.checkAndGetUser(email.ToString(), true);
+            User user = _context.Users.Where(user => user.Email == email.ToString()).FirstOrDefault();
             if (user != null && user.EmailVerify)
                 return user.Password == password.ToString();
             else

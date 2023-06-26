@@ -1,12 +1,10 @@
 ﻿using BixbyShop_LK.Config;
-using BixbyShop_LK.Config.DI;
 using BixbyShop_LK.Users_and_Roles;
 using System.Data;
 using BCryptNet = BCrypt.Net.BCrypt;
 
-namespace BixbyShop_LK.Services
+namespace BixbyShop_LK.Services.UserService
 {
-    [Component]
     public class UserService
     {
 
@@ -22,15 +20,16 @@ namespace BixbyShop_LK.Services
             _roleService = new RoleService();
             _tokenService = new TokenService();
             _bixbyConfig = new BixbyConfig();
+            _emailService = new EmailService();
         }
         public void Dispose()
         {
             _context.Dispose();
         }
 
-        public int ResetThePassword(String oldPassword,String password, String email)
+        public int ResetThePassword(string oldPassword, string password, string email)
         {
-            User user = checkAndGetUser(email, true);
+            User user = GetUser(email);
             if (user.Password == BCryptNet.HashPassword(oldPassword))
             {
                 user.Password = BCryptNet.HashPassword(password);
@@ -39,9 +38,9 @@ namespace BixbyShop_LK.Services
             return -1;
         }
 
-        public int EmailActionInUser(String? password, String? email, String code, int i)
+        public int EmailActionInUser(string? password, string? email, string code, int i)
         {
-            if(i == 0)
+            if (i == 0)
                 return _bixbyConfig.EmailVerificationValidation_TakeTheAction(password, email, code, ResetThePasswordViaEmail);
             else if (i == 1)
                 return _bixbyConfig.EmailVerificationValidation_TakeTheAction(password, email, code, ResetThePasswordViaEmail);
@@ -49,38 +48,29 @@ namespace BixbyShop_LK.Services
                 return -1;
         }
 
-        private int ResetThePasswordViaEmail(String? password, String? email)
+        private int ResetThePasswordViaEmail(string? password, string? email)
         {
-            User user = checkAndGetUser(email, true);
+            User user = GetUser(email);
             user.Password = BCryptNet.HashPassword(password);
             return UpdateUser(user);
         }
 
-        private int EmailVerifyViaEmail(String? password, String? email)
+        private int EmailVerifyViaEmail(string? password, string? email)
         {
-            User user = checkAndGetUser(email, true);
+            User user = GetUser(email);
             user.EmailVerify = true;
             return UpdateUser(user);
         }
 
-        public dynamic checkAndGetUser(String email, bool getFullUser)
+        public User GetUser(string email)
         {
-            User user = _context.Users.Where(user => user.Email == email).FirstOrDefault();
-            if (getFullUser)
-                return user;
-            else
-            {
-                if (user != null)
-                    return true;
-                else
-                    return false;
-            }
+            return _context.Users.Where(user => user.Email == email).FirstOrDefault();
         }
 
-        public int requestPasswordReset(String email)
+        public int requestPasswordReset(string email)
         {
-            User user = checkAndGetUser(email, true);
-            if(user != null)
+            User user = GetUser(email);
+            if (user != null)
             {
                 _emailService.SendEmail(email, "Reset Tour Password 😊✌️✌️💥", 0);
                 return 0;
@@ -88,22 +78,23 @@ namespace BixbyShop_LK.Services
             return -1;
         }
 
-        public String signUp(String fistName, String lastName, String email, String address, String password, String pic, List<String> roles)
+        public string signUp(string email, string password, List<string>? roles)
         {
-            if(checkAndGetUser(email, false))
+            if (GetUser(email) == null)
             {
-                if(saveAUser(fistName, lastName, email, address, password, pic, roles) != -1)
+                User user = saveAUser("", "", email, "", password, "default.png", roles);
+                if (user != null)
                 {
-                     _emailService.SendEmail(email, "VerifyYourEmail 😊✌️✌️💥", 0);
-                    return _tokenService.tokenCreator(email, BCryptNet.HashPassword(password));
+                    _emailService.SendEmail(user.Email, "VerifyYourEmail 😊✌️✌️💥", 0);
+                    return _tokenService.tokenCreator(user.Email, BCryptNet.HashPassword(password));
                 }
             }
             return null;
         }
 
-        public String login(String email, String password)
+        public string login(string email, string password)
         {
-            User user = checkAndGetUser(email, true);
+            User user = GetUser(email);
             if (user != null && user.EmailVerify)
                 if (passwordMatch(password, user))
                     return _tokenService.tokenCreator(email, BCryptNet.HashPassword(password));
@@ -113,7 +104,7 @@ namespace BixbyShop_LK.Services
                 return null;
         }
 
-        public bool checkUserAuthMiddleWare(String token)
+        public bool checkUserAuthMiddleWare(string token)
         {
             return _tokenService.ValidateJwtToken(token);
         }
@@ -130,15 +121,15 @@ namespace BixbyShop_LK.Services
             _context.SaveChanges();
         }
 
-        private bool passwordMatch(String plainPassword, User user)
+        private bool passwordMatch(string plainPassword, User user)
         {
             return BCryptNet.Verify(plainPassword, user.Password);
         }
 
-        private int saveAUser(String fistName, String lastName, String email, String address, String password, String pic, List<String> roles)
+        private User saveAUser(string fistName, string lastName, string email, string address, string password, string pic, List<string> roles)
         {
-            if(checkAndGetUser(email, false))
-                return -1;
+            if (GetUser(email) != null)
+                return null;
             else
             {
                 User user = new User { FirstName = fistName, LastName = lastName, Email = email, Address = address, Pic = pic, EmailVerify = false };
@@ -150,135 +141,16 @@ namespace BixbyShop_LK.Services
                     Roles role = _roleService.GetRoles(roles[i]);
                     if (role != null)
                     {
-                        userRoles[i] = role;
+                        userRoles.Add(role);
                     }
                 }
                 user.Roles = userRoles;
 
                 _context.Users.Add(user);
+                _context.SaveChanges();
 
-                return _context.SaveChanges();
+                return GetUser(user.Email);
             }
         }
-
-        [Component]
-        public class RoleService {
-
-            private readonly AppDbContext _context;
-
-            public RoleService()
-            {
-                _context = new AppDbContext();
-            }
-            public void Dispose()
-            {
-                _context.Dispose();
-            }
-
-            public Roles GetRoles(String roles) => _context.Roles.Where(r => r.Role == roles).FirstOrDefault();
-
-            public int saveASingleRole(String role, ICollection<User> users, ICollection<Authority> authorities)
-            {
-                if(_context.Roles.Where(r => r.Role == role) == null)
-                {
-                    var newRole = new Roles { Role = role , Authorities = authorities, Users = users};
-                    _context.Roles.Add(newRole);
-                    return _context.SaveChanges();
-                }
-                return -1;
-            }
-            public List<Roles> GetAllRoles()
-            {
-                return _context.Roles.ToList();
-            }
-
-            public Roles GetRolesById(string role)
-            {
-                return _context.Roles.FirstOrDefault(r => r.Role == role);
-            }
-
-            public void CreateRoles(Roles roles)
-            {
-                _context.Roles.Add(roles);
-                _context.SaveChanges();
-            }
-
-            public void UpdateRoles(Roles role)
-            {
-                _context.Roles.Update(role);
-                _context.SaveChanges();
-            }
-
-            public void DeleteRoles(Roles roles)
-            {
-                _context.Roles.Remove(roles);
-                _context.SaveChanges();
-            }
-
-        }
-
-        [Component]
-        public class AuthorityService
-        {
-            private readonly AppDbContext _context;
-
-            public AuthorityService()
-            {
-                _context = new AppDbContext();
-            }
-            public void Dispose()
-            {
-                _context.Dispose();
-            }
-
-            public Authority GetAuthority(String authority) => _context.Authorities.Where(a=> a.Name == authority).FirstOrDefault();
-
-            public Authority saveOneAuthorityAction(String name, ICollection<Roles>? roles)
-            {
-                if(GetAuthorityByName(name) == null)
-                {
-                    Authority authority = new Authority { 
-                        Name = name,
-                        Roles = roles
-                    };
-
-                    _context.Authorities.Add(authority);
-
-                    _context.SaveChanges();
-
-                    return GetAuthorityByName(name);
-                }
-                return null;
-            }
-
-            public List<Authority> GetAllAuthorities()
-            {
-                return _context.Authorities.ToList();
-            }
-
-            public Authority GetAuthorityByName(string name)
-            {
-                return _context.Authorities.FirstOrDefault(a => a.Name == name);
-            }
-
-            public void CreateAuthority(Authority authority)
-            {
-                _context.Authorities.Add(authority);
-                _context.SaveChanges();
-            }
-
-            public void UpdateAuthority(Authority authority)
-            {
-                _context.Authorities.Update(authority);
-                _context.SaveChanges();
-            }
-
-            public void DeleteAuthority(Authority authority)
-            {
-                _context.Authorities.Remove(authority);
-                _context.SaveChanges();
-            }
-        }
-
     }
 }

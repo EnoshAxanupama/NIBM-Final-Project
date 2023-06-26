@@ -1,9 +1,7 @@
-﻿using BixbyShop_LK.Config.DI;
-using BixbyShop_LK.Models.Item;
+﻿using BixbyShop_LK.Models.Item;
 
 namespace BixbyShop_LK.Services
 {
-    [Component]
     public class ShopItemService
     {
         private readonly AppDbContext _dbContext;

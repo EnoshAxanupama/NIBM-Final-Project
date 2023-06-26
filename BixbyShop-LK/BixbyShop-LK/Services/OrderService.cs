@@ -1,9 +1,7 @@
-﻿using BixbyShop_LK.Config.DI;
-using BixbyShop_LK.Models.Order;
+﻿using BixbyShop_LK.Models.Order;
 
 namespace BixbyShop_LK.Services
 {
-    [Component]
     public class OrderService
     {
         private readonly AppDbContext _dbContext;

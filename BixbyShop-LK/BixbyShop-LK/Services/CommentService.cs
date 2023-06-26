@@ -1,9 +1,7 @@
-﻿using BixbyShop_LK.Config.DI;
-using BixbyShop_LK.Models.Comments;
+﻿using BixbyShop_LK.Models.Comments;
 
 namespace BixbyShop_LK.Services
 {
-    [Component]
     public class CommentService
     {
         private readonly AppDbContext _dbContext;

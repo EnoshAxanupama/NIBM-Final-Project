@@ -1,4 +1,4 @@
-﻿using BixbyShop_LK.Config.DI;
+﻿using BixbyShop_LK.Config;
 using BixbyShop_LK.Models.Comments;
 using BixbyShop_LK.Models.Item;
 using BixbyShop_LK.Models.Order;
@@ -7,9 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BixbyShop_LK
 {
-    [Component]
     public class AppDbContext : DbContext
     {
+        static public bool in_memory;
+        
         public DbSet<User> Users { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Authority> Authorities { get; set; }
@@ -20,14 +21,45 @@ namespace BixbyShop_LK
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("Bixby_ShopAPP_InMemoryDb");
+            // optionsBuilder.UseInMemoryDatabase("Bixby_ShopAPP_InMemoryDb");
+            // Uncomment the following lines if you are using a connection string from the configuration file
+            // string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            // optionsBuilder.UseSqlServer(connectionString);
+
+            if (in_memory)
+                optionsBuilder.UseInMemoryDatabase("Bixby_ShopAPP_InMemoryDb");
+            else
+                if (!optionsBuilder.IsConfigured)
+                optionsBuilder.UseSqlServer(EnvironmentService.getEnvironmentVariable("DefaultConnection"));
+                    //optionsBuilder.UseSqlServer("Server=localhost,1433;Database=Bixby_ShopAPP;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=true");
+                
+
             optionsBuilder.EnableSensitiveDataLogging();
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            {
+                modelBuilder.Entity<User>()
+                  .Property(e => e.FirstName)
+                  .HasDefaultValue("");
+
+                modelBuilder.Entity<User>()
+                 .Property(e => e.LastName)
+                 .HasDefaultValue("");
+
+                modelBuilder.Entity<User>()
+                 .Property(e => e.Address)
+                 .HasDefaultValue("");
+
+                modelBuilder.Entity<User>()
+                 .Property(e => e.EmailVerify)
+                 .HasDefaultValue(false);
+            }
+
             modelBuilder.Entity<User>()
-                .HasMany(u => u.Roles)
+               .HasMany(u => u.Roles)
                 .WithMany(r => r.Users)
                 .UsingEntity<Dictionary<string, object>>(
                     "UserRoles",

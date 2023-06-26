@@ -1,10 +1,12 @@
 using BixbyShop_LK;
-using BixbyShop_LK.Services;
+using BixbyShop_LK.Config;
+using BixbyShop_LK.Services.UserService;
 using BixbyShop_LK.Users_and_Roles;
+
 
 namespace BixbyShopApp_GUI
 {
-    internal static class Program
+    public static class Program
     {
         /// <summary>
         ///  The main entry point for the application.
@@ -12,8 +14,14 @@ namespace BixbyShopApp_GUI
         [STAThread]
         static void Main()
         {
+             MessageBox.Show(EnvironmentService.getEnvironmentVariable("MemDatabase"));
+            //AppDbContext.in_memory = bool.Parse();
             using (var context = new AppDbContext())
             {
+                
+                BixbyConfig.startUp();
+                
+
                 var userDummy = context.Users.FirstOrDefault();
                 var RolesDummy = context.Roles.FirstOrDefault();
                 var AuthoritiesDummy = context.Authorities.FirstOrDefault();
@@ -22,41 +30,63 @@ namespace BixbyShopApp_GUI
                 var ShopItemsDummy = context.ShopItems.FirstOrDefault();
                 var CommentsDummy = context.Comments.FirstOrDefault();
 
-                Console.WriteLine("Tables created in the in-memory database.");
+                if(AppDbContext.in_memory)
+                {
+                    context.Database.EnsureDeleted();
+                    context.Database.EnsureCreated();
+                }
+
+                
             }
 
-            UserService.RoleService roleService = new UserService.RoleService();
-            UserService.AuthorityService authorityService = new UserService.AuthorityService();
 
             List<Roles> userRoles = new List<Roles>();
             List<Authority> userAuthority = new List<Authority>();
             List<User> users = new List<User>();
 
+            RoleService roleService = new RoleService();
+            AuthorityService authorityService = new AuthorityService();
 
-            Roles roles = new Roles();
-            roles.Authorities = userAuthority;
-            roles.Users = users;
-            roles.Role = "User";
-            roleService.CreateRoles(roles);
+            if(roleService.GetRolesByRole("User") != null)
+            {
+                Roles roles = new Roles();
+                roles.Authorities = userAuthority;
+                roles.Users = users;
+                roles.Role = "User";
+                roleService.CreateRoles(roles);
 
-            // ===================================================
-            Authority ReadAuthority = authorityService.saveOneAuthorityAction("ReadAuthority", userRoles);
-            Authority WriteAuthority = authorityService.saveOneAuthorityAction("WriteAuthority", userRoles);
-            Authority UpdateAuthority = authorityService.saveOneAuthorityAction("UpdateAuthority", userRoles);
+                // ===================================================
+                Authority ReadAuthority = authorityService.saveOneAuthorityAction("ReadAuthority", userRoles);
+                Authority WriteAuthority = authorityService.saveOneAuthorityAction("WriteAuthority", userRoles);
+                Authority UpdateAuthority = authorityService.saveOneAuthorityAction("UpdateAuthority", userRoles);
 
-            // ===================================================
+                // ===================================================
 
-            Roles role = roleService.GetRoles("User");
-            userAuthority.Add(ReadAuthority);
-            userAuthority.Add(WriteAuthority);
-            userAuthority.Add(UpdateAuthority);
+                Roles role = roleService.GetRoles("User");
+                userAuthority.Add(ReadAuthority);
+                userAuthority.Add(WriteAuthority);
+                userAuthority.Add(UpdateAuthority);
 
-            role.Authorities = userAuthority;
-            roleService.UpdateRoles(role);
+                role.Authorities = userAuthority;
+                roleService.UpdateRoles(role);
+            }
 
 
+          
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            try
+            {
+                string TokenValue = Properties.Settings.Default.TokenValue;
+                if (!string.IsNullOrEmpty(TokenValue))
+                    Application.Run(new DashBoard(TokenValue));
+                else
+                    Application.Run(new UserForm());
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }
