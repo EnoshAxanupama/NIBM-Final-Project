@@ -1,54 +1,64 @@
-﻿using BixbyShop_LK.Config;
+﻿using BixbyShop_LK.Users_and_Roles;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Data;
 
-namespace BixbyShop_LK.Users_and_Roles.Services
+namespace BixbyShop_LK.Services
 {
     public class RolesService
     {
-        private readonly IMongoCollection<Roles> rolesCollection;
-        private readonly MongoDBContext mongoDBContext;
+        private readonly IMongoCollection<Role> rolesCollection;
+        private readonly IMongoDatabase database;
 
-        public RolesService(IMongoDatabase database)
+        public RolesService(MongoDbContext mongoDbContext)
         {
-            rolesCollection = database.GetCollection<Roles>("roles");
+            rolesCollection = mongoDbContext.Roles;
         }
 
-        public RolesService(MongoDBContext mongoDBContext)
+        public RolesService(string connectionString, string databaseName)
         {
-            this.mongoDBContext = mongoDBContext;
-            rolesCollection = mongoDBContext.Roles;
+            var client = new MongoClient(connectionString);
+            database = client.GetDatabase(databaseName);
+            rolesCollection = database.GetCollection<Role>("Roles");
         }
 
-        public List<Roles> GetAllRoles()
+        public Role GetRoleByRole(string roleName)
+        {
+            var filter = Builders<Role>.Filter.Eq("UserRole", roleName);
+            return rolesCollection.Find(filter).FirstOrDefault();
+        }
+
+        public List<Role> GetAllRoles()
         {
             return rolesCollection.Find(_ => true).ToList();
         }
 
-        public Roles GetRoleById(string roleId)
+        public Role GetRoleById(string roleId)
         {
             var objectId = new ObjectId(roleId);
             return rolesCollection.Find(role => role.Id == objectId).FirstOrDefault();
         }
 
-        public Roles GetRoleByRole(String role)
-        {
-            return rolesCollection.Find(role => role.Role.Equals(role)).FirstOrDefault();
-        }
-
-        public void CreateRole(Roles role)
+        public void CreateRole(Role role)
         {
             rolesCollection.InsertOne(role);
         }
 
-        public void UpdateRole(ObjectId roleId, Roles updatedRole)
+        public void UpdateRole(string roleId, Role updatedRole)
+        {
+            var objectId = new ObjectId(roleId);
+            rolesCollection.ReplaceOne(role => role.Id == objectId, updatedRole);
+        }
+
+        public void UpdateRole(ObjectId roleId, Role updatedRole)
         {
             rolesCollection.ReplaceOne(role => role.Id == roleId, updatedRole);
         }
 
-        public void DeleteRole(ObjectId roleId)
+        public void DeleteRole(string roleId)
         {
-            rolesCollection.DeleteOne(role => role.Id == roleId);
+            var objectId = new ObjectId(roleId);
+            rolesCollection.DeleteOne(role => role.Id == objectId);
         }
     }
 }

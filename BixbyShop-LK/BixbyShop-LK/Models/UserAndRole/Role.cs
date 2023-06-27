@@ -4,13 +4,13 @@ using System.Text;
 
 namespace BixbyShop_LK.Users_and_Roles
 {
-    public class Roles
+    public class Role
     {
         [BsonId]
         public ObjectId Id { get; set; }
 
-        [BsonElement("Role")]
-        public String Role { get; set; }
+        [BsonElement("UserRole")]
+        public String UserRole { get; set; }
 
         public Authority[] Authorities { get; set; }
         public User[] Users { get; set; }
@@ -19,7 +19,7 @@ namespace BixbyShop_LK.Users_and_Roles
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Role ID: {Id}");
-            sb.AppendLine($"Role: {Role}");
+            sb.AppendLine($"Role: {UserRole}");
             sb.AppendLine("Authorities:");
 
             if (Authorities != null && Authorities.Length > 0)

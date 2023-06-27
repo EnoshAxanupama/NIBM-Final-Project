@@ -1,26 +1,32 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using BixbyShop_LK.Config;
 using Microsoft.IdentityModel.Tokens;
+using MongoDB.Driver;
 
 namespace BixbyShop_LK.Services
 {
     public class TokenService
     {
 
-        private readonly string secretKey;
-        private readonly string issuer;
-        private readonly string audience;
+        private readonly string secretKey = "cequfhqifhqhfqrye1twt27t321tet67wyfdtqwfd1r2rt2fdytqwdrdqdscjnjhkfhkjewfhjbewfwjdsgjbdhfjcdshchsjdvhsvfhjdsvchjdvshvcdsgjvhjsvdchjdsvhfvsgvchdsvchqd";
+        private readonly string issuer = "Manura Sanjula";
+        private readonly string audience = "Manura Sanjula";
+        private readonly UserService userService;
+        private readonly IMongoDatabase database;
 
-        public TokenService()
+
+        public TokenService(MongoDbContext mongoDbContext)
         {
-            secretKey = EnvironmentService.getEnvironmentVariable("your-secret-key");
-            issuer = EnvironmentService.getEnvironmentVariable("your-issuer");
-            audience = EnvironmentService.getEnvironmentVariable("your-audience");
+            userService = new UserService(mongoDbContext);
         }
 
-      
+        public TokenService(string connectionString, string databaseName)
+        {
+            userService = new UserService(connectionString, databaseName);
+        }
+
+
         private string GenerateJwtToken(string secretKey, string issuer, string audience, int expiryMinutes, String email, String password)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
@@ -55,11 +61,11 @@ namespace BixbyShop_LK.Services
             var email = claims.FirstOrDefault(c => c.Type == "email");
             var password = claims.FirstOrDefault(c => c.Type == "password");
 
-            /*User user = _userService.checkAndGetUser(email.ToString(), true);
+            User user = userService.GetUserByEmail(email.ToString());
             if (user != null && user.EmailVerify)
                 return user.Password == password.ToString();
             else
-                return false;*/
+                return false;
             return false;
         }
 

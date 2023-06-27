@@ -12,8 +12,8 @@ namespace BixbyShop_LK.Services
         private readonly string fromEmail;
         public EmailService()
         {
-            _apiKey = EnvironmentService.getEnvironmentVariable("SendGridAPIKey");
-            fromEmail = EnvironmentService.getEnvironmentVariable("SenderEmail");
+            _apiKey = "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";
+            fromEmail = "w.m.manurasanjula2003@gmail.com";
         }
 
         private string FormatHtml(string input, Func<string, string> valueProvider)

@@ -1,6 +1,6 @@
-﻿using MongoDB.Bson;
+﻿using BixbyShop_LK.Services;
+using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Collections.Generic;
 
 namespace BixbyShop_LK.Models.Comments.Services
 {
@@ -8,9 +8,9 @@ namespace BixbyShop_LK.Models.Comments.Services
     {
         private readonly IMongoCollection<Comment> commentCollection;
 
-        public CommentService(IMongoDatabase database)
+        public CommentService(MongoDbContext mongoDbContext)
         {
-            commentCollection = database.GetCollection<Comment>("comments");
+            commentCollection = mongoDbContext.Comments;
         }
 
         public List<Comment> GetAllComments()

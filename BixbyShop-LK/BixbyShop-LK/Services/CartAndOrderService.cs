@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using BixbyShop_LK.Services;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Collections.Generic;
 
@@ -8,9 +9,9 @@ namespace BixbyShop_LK.Models.Order.Services
     {
         private readonly IMongoCollection<CartAndOrder> cartAndOrderCollection;
 
-        public CartAndOrderService(IMongoDatabase database)
+        public CartAndOrderService(MongoDbContext mongoDbContext)
         {
-            cartAndOrderCollection = database.GetCollection<CartAndOrder>("cartAndOrders");
+            cartAndOrderCollection = mongoDbContext.CartAndOrders;
         }
 
         public List<CartAndOrder> GetAllCartAndOrders()

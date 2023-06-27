@@ -1,15 +1,17 @@
-﻿using MongoDB.Bson;
+﻿using BixbyShop_LK.Models.Order;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Collections.Generic;
 
-namespace BixbyShop_LK.Models.Order.Services
+namespace BixbyShop_LK.Services
 {
     public class OrderService
     {
         private readonly IMongoCollection<Order> orderCollection;
 
-        public OrderService(IMongoDatabase database)
+        public OrderService(MongoDbContext mongoDbContext)
         {
-            orderCollection = database.GetCollection<Order>("orders");
+            orderCollection = mongoDbContext.Orders;
         }
 
         public List<Order> GetAllOrders()

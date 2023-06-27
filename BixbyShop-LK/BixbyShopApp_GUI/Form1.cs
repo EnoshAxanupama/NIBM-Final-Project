@@ -1,10 +1,106 @@
+using BixbyShop_LK.Config;
+using BixbyShop_LK.Services;
+using MetroFramework;
+using MetroFramework.Components;
+using MetroFramework.Forms;
+using Newtonsoft.Json.Linq;
+
 namespace BixbyShopApp_GUI
 {
-    public partial class Form1 : Form
+    public partial class UserForm : MetroForm
     {
-        public Form1()
+        private MetroStyleManager metroStyleManager;
+        private UserService _userService = Program.userService;
+
+        private void tokenSever(String token)
+        {
+            try
+            {
+                Properties.Settings.Default.TokenValue = token;
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public UserForm()
         {
             InitializeComponent();
+            InitializeMetroStyleManager();
+            RefreshTheme();
+
+            metroToggle1.Checked = true;
+        }
+
+        private void UserForm_Load(object sender, EventArgs e)
+        {
+            InitializeMetroStyleManager();
+            RefreshTheme();
+            metroToggle1.Checked = true;
+        }
+
+        private void InitializeMetroStyleManager()
+        {
+            metroStyleManager = new MetroStyleManager();
+            metroStyleManager.Owner = this;
+            metroStyleManager.Theme = MetroThemeStyle.Dark;
+
+            // Associate the metroToggle1 with the metroStyleManager
+            metroStyleManager.Style = MetroColorStyle.Blue;
+            metroStyleManager.Theme = MetroThemeStyle.Dark;
+            metroToggle1.StyleManager = metroStyleManager;
+
+            // Subscribe to the CheckedChanged event of metroToggle1
+            metroToggle1.CheckedChanged += metroToggle1_CheckedChanged;
+            RefreshTheme();
+        }
+
+        private void RefreshTheme()
+        {
+            Refresh();
+            foreach (Control control in Controls)
+            {
+                if (control is MetroFramework.Controls.MetroLabel ||
+                    control is MetroFramework.Controls.MetroButton ||
+                    control is MetroFramework.Controls.MetroTextBox)
+                {
+                    metroStyleManager.Theme = metroToggle1.Checked ? MetroThemeStyle.Dark : MetroThemeStyle.Light;
+                    control.Refresh();
+                }
+            }
+        }
+
+        private void metroToggle1_CheckedChanged(object sender, EventArgs e)
+        {
+            metroStyleManager.Theme = metroToggle1.Checked ? MetroThemeStyle.Dark : MetroThemeStyle.Light;
+            RefreshTheme();
+        }
+
+        private void Login_Click(object sender, EventArgs e)
+        {
+            String userName = email.Text.Trim();
+            String userPassword = password.Text.Trim();
+            String token = _userService.Login(userName, userPassword);
+            tokenSever(token);
+        }
+
+        private void NewAccount_Click(object sender, EventArgs e)
+        {
+            String email = c_email.Text;
+            String password = c_pass.Text;
+            String conPass = c_con_pass.Text;
+
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(conPass))
+            {
+                if (string.Equals(password, conPass))
+                {
+                    String token = _userService.CreateNewAccount(email, password, conPass);
+                    MessageBox.Show(token);
+                    tokenSever(token);
+                }
+            }
         }
     }
 }

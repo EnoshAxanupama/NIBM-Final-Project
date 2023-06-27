@@ -40,7 +40,6 @@ C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\bin\Debug\net6.0-windows
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\bin\Debug\net6.0-windows\BixbyShop-LK.dll
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\bin\Debug\net6.0-windows\BixbyShop-LK.pdb
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.csproj.AssemblyReference.cache
-C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.Form1.resources
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.csproj.GenerateResource.cache
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.GeneratedMSBuildEditorConfig.editorconfig
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.AssemblyInfoInputs.cache
@@ -65,3 +64,9 @@ C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\bin\Debug\net6.0-windows
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\bin\Debug\net6.0-windows\runtimes\linux\native\libmongocrypt.so
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\bin\Debug\net6.0-windows\runtimes\osx\native\libmongocrypt.dylib
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\bin\Debug\net6.0-windows\runtimes\win\native\mongocrypt.dll
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\bin\Debug\net6.0-windows\MetroFramework.Design.dll
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\bin\Debug\net6.0-windows\MetroFramework.Fonts.dll
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\bin\Debug\net6.0-windows\MetroFramework.dll
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.UserForm.resources
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\bin\Debug\net6.0-windows\BixbyShopApp_GUI.dll.config
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.DashBoard.resources

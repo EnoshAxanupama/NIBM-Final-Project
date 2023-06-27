@@ -1,6 +1,6 @@
-﻿using MongoDB.Bson;
+﻿using BixbyShop_LK.Services;
+using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Collections.Generic;
 
 namespace BixbyShop_LK.Models.Item.Services
 {
@@ -8,9 +8,9 @@ namespace BixbyShop_LK.Models.Item.Services
     {
         private readonly IMongoCollection<ShopItem> shopItemCollection;
 
-        public ShopItemService(IMongoDatabase database)
+        public ShopItemService(MongoDbContext mongoDbContext)
         {
-            shopItemCollection = database.GetCollection<ShopItem>("shopItems");
+            shopItemCollection = mongoDbContext.ShopItems;
         }
 
         public List<ShopItem> GetAllShopItems()

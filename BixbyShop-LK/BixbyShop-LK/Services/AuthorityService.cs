@@ -1,23 +1,22 @@
-﻿using BixbyShop_LK.Config;
+﻿using BixbyShop_LK.Users_and_Roles;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-
-namespace BixbyShop_LK.Users_and_Roles.Services
+namespace BixbyShop_LK.Services
 {
     public class AuthorityService
     {
         private readonly IMongoCollection<Authority> authorityCollection;
-        private readonly MongoDBContext mongoDBContext;
 
-        public AuthorityService(IMongoDatabase database)
+        public AuthorityService(MongoDbContext mongoDbContext)
         {
-            authorityCollection = database.GetCollection<Authority>("authorities");
+            authorityCollection = mongoDbContext.Authorities;
         }
-        public AuthorityService(MongoDBContext mongoDBContext)
+
+        public Authority GetAuthorityByName(string name)
         {
-            this.mongoDBContext = mongoDBContext;
-            authorityCollection = this.mongoDBContext.Authorities;
+            var filter = Builders<Authority>.Filter.Eq("Name", name);
+            return authorityCollection.Find(filter).FirstOrDefault();
         }
 
         public List<Authority> GetAllAuthorities()
@@ -31,17 +30,12 @@ namespace BixbyShop_LK.Users_and_Roles.Services
             return authorityCollection.Find(authority => authority.Id == objectId).FirstOrDefault();
         }
 
-        public Authority GetAuthorityByName(string name)
-        {
-            return authorityCollection.Find(authority => authority.Name == name).FirstOrDefault();
-        }
-
         public void CreateAuthority(Authority authority)
         {
             authorityCollection.InsertOne(authority);
         }
 
-        public void CreateAuthority(List<Authority>  authorities)
+        public void CreateAuthority(List<Authority> authorities)
         {
             authorityCollection.InsertMany(authorities);
         }

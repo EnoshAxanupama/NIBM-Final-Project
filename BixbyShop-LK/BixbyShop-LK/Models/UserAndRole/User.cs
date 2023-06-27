@@ -17,7 +17,7 @@ namespace BixbyShop_LK
         public String Password { get; set; }
         public String Pic { get; set; }
         public bool EmailVerify { get; set; }
-        public Roles[] Roles { get; set; }
+        public Role[] Roles { get; set; }
         public Order[] Orders { get; set; }
         public CartAndOrder[] Cart { get; set; }
         public Comment[] Comments { get; set; }
