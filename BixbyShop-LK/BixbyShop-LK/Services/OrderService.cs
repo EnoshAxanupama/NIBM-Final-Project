@@ -9,9 +9,11 @@ namespace BixbyShop_LK.Services
     {
         private readonly IMongoCollection<Order> orderCollection;
 
-        public OrderService(MongoDbContext mongoDbContext)
+        public OrderService()
         {
-            orderCollection = mongoDbContext.Orders;
+            var client = new MongoClient("mongodb://admin:p%40ssw0rd@localhost:27017/?authMechanism=SCRAM-SHA-256");
+            var database = client.GetDatabase("BixbyShop_LK");
+            orderCollection = database.GetCollection<Order>("Orders");
         }
 
         public List<Order> GetAllOrders()

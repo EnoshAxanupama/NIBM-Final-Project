@@ -1,52 +1,55 @@
-﻿using BixbyShop_LK.Users_and_Roles;
+﻿using BixbyShop_LK.Models.Order;
+using BixbyShop_LK.Users_and_Roles;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace BixbyShop_LK.Services
 {
-    public class AuthorityService
+    public static class AuthorityService
     {
-        private readonly IMongoCollection<Authority> authorityCollection;
+        private static MongoClient client = new MongoClient("mongodb://admin:p%40ssw0rd@localhost:27017/?authMechanism=SCRAM-SHA-256");
+        private static IMongoDatabase database = client.GetDatabase("BixbyShop_LK");
+        private static IMongoCollection<Authority> authorityCollection = database.GetCollection<Authority>("AuthorityServices");
 
-        public AuthorityService(MongoDbContext mongoDbContext)
-        {
-            authorityCollection = mongoDbContext.Authorities;
-        }
-
-        public Authority GetAuthorityByName(string name)
+        public static Authority GetAuthorityByName(string name)
         {
             var filter = Builders<Authority>.Filter.Eq("Name", name);
             return authorityCollection.Find(filter).FirstOrDefault();
         }
 
-        public List<Authority> GetAllAuthorities()
+        public static Authority GetAuthorityByNameViaList(string name)
+        {
+            return GetAllAuthorities().Find(au => au.Name == name);
+        }
+
+        public static List<Authority> GetAllAuthorities()
         {
             return authorityCollection.Find(_ => true).ToList();
         }
 
-        public Authority GetAuthorityById(string authorityId)
+        public static Authority GetAuthorityById(string authorityId)
         {
             var objectId = new ObjectId(authorityId);
             return authorityCollection.Find(authority => authority.Id == objectId).FirstOrDefault();
         }
 
-        public void CreateAuthority(Authority authority)
+        public static void CreateAuthority(Authority authority)
         {
             authorityCollection.InsertOne(authority);
         }
 
-        public void CreateAuthority(List<Authority> authorities)
+        public static void CreateAuthority(List<Authority> authorities)
         {
             authorityCollection.InsertMany(authorities);
         }
 
-        public void UpdateAuthority(string authorityId, Authority updatedAuthority)
+        public static void UpdateAuthority(string authorityId, Authority updatedAuthority)
         {
             var objectId = new ObjectId(authorityId);
             authorityCollection.ReplaceOne(authority => authority.Id == objectId, updatedAuthority);
         }
 
-        public void DeleteAuthority(string authorityId)
+        public static void DeleteAuthority(string authorityId)
         {
             var objectId = new ObjectId(authorityId);
             authorityCollection.DeleteOne(authority => authority.Id == objectId);

@@ -1,4 +1,5 @@
-﻿using BixbyShop_LK.Services;
+﻿using BixbyShop_LK.Models.Comments;
+using BixbyShop_LK.Services;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -9,9 +10,11 @@ namespace BixbyShop_LK.Models.Order.Services
     {
         private readonly IMongoCollection<CartAndOrder> cartAndOrderCollection;
 
-        public CartAndOrderService(MongoDbContext mongoDbContext)
+        public CartAndOrderService()
         {
-            cartAndOrderCollection = mongoDbContext.CartAndOrders;
+            var client = new MongoClient("mongodb://admin:p%40ssw0rd@localhost:27017/?authMechanism=SCRAM-SHA-256");
+            var database = client.GetDatabase("BixbyShop_LK");
+            cartAndOrderCollection = database.GetCollection<CartAndOrder>("CartAndOrders");
         }
 
         public List<CartAndOrder> GetAllCartAndOrders()

@@ -8,9 +8,11 @@ namespace BixbyShop_LK.Models.Comments.Services
     {
         private readonly IMongoCollection<Comment> commentCollection;
 
-        public CommentService(MongoDbContext mongoDbContext)
+        public CommentService()
         {
-            commentCollection = mongoDbContext.Comments;
+            var client = new MongoClient("mongodb://admin:p%40ssw0rd@localhost:27017/?authMechanism=SCRAM-SHA-256");
+            var database = client.GetDatabase("BixbyShop_LK");
+            commentCollection = database.GetCollection<Comment>("Comments");
         }
 
         public List<Comment> GetAllComments()

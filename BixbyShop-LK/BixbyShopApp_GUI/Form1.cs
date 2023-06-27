@@ -1,17 +1,12 @@
-using BixbyShop_LK.Config;
-using BixbyShop_LK.Services;
 using MetroFramework;
 using MetroFramework.Components;
 using MetroFramework.Forms;
-using Newtonsoft.Json.Linq;
 
 namespace BixbyShopApp_GUI
 {
     public partial class UserForm : MetroForm
     {
         private MetroStyleManager metroStyleManager;
-        private UserService _userService = Program.userService;
-
         private void tokenSever(String token)
         {
             try
@@ -30,7 +25,6 @@ namespace BixbyShopApp_GUI
             InitializeComponent();
             InitializeMetroStyleManager();
             RefreshTheme();
-
             metroToggle1.Checked = true;
         }
 
@@ -52,7 +46,6 @@ namespace BixbyShopApp_GUI
             metroStyleManager.Theme = MetroThemeStyle.Dark;
             metroToggle1.StyleManager = metroStyleManager;
 
-            // Subscribe to the CheckedChanged event of metroToggle1
             metroToggle1.CheckedChanged += metroToggle1_CheckedChanged;
             RefreshTheme();
         }
@@ -82,7 +75,7 @@ namespace BixbyShopApp_GUI
         {
             String userName = email.Text.Trim();
             String userPassword = password.Text.Trim();
-            String token = _userService.Login(userName, userPassword);
+            String token = Program.userService.Login(userName, userPassword);
             tokenSever(token);
         }
 
@@ -96,7 +89,7 @@ namespace BixbyShopApp_GUI
             {
                 if (string.Equals(password, conPass))
                 {
-                    String token = _userService.CreateNewAccount(email, password, conPass);
+                    String token = Program.userService.CreateNewAccount(email, password, conPass);
                     MessageBox.Show(token);
                     tokenSever(token);
                 }

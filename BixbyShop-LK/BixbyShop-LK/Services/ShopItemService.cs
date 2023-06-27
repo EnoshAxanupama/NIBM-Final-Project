@@ -1,4 +1,5 @@
 ﻿using BixbyShop_LK.Services;
+using BixbyShop_LK.Users_and_Roles;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -8,9 +9,11 @@ namespace BixbyShop_LK.Models.Item.Services
     {
         private readonly IMongoCollection<ShopItem> shopItemCollection;
 
-        public ShopItemService(MongoDbContext mongoDbContext)
+        public ShopItemService()
         {
-            shopItemCollection = mongoDbContext.ShopItems;
+            var client = new MongoClient("mongodb://admin:p%40ssw0rd@localhost:27017/?authMechanism=SCRAM-SHA-256");
+            var database = client.GetDatabase("BixbyShop_LK");
+            shopItemCollection = database.GetCollection<ShopItem>("AuthorityServices");
         }
 
         public List<ShopItem> GetAllShopItems()

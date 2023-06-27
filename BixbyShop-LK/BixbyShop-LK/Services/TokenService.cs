@@ -6,28 +6,15 @@ using MongoDB.Driver;
 
 namespace BixbyShop_LK.Services
 {
-    public class TokenService
+    public static class TokenService
     {
 
-        private readonly string secretKey = "cequfhqifhqhfqrye1twt27t321tet67wyfdtqwfd1r2rt2fdytqwdrdqdscjnjhkfhkjewfhjbewfwjdsgjbdhfjcdshchsjdvhsvfhjdsvchjdvshvcdsgjvhjsvdchjdsvhfvsgvchdsvchqd";
-        private readonly string issuer = "Manura Sanjula";
-        private readonly string audience = "Manura Sanjula";
-        private readonly UserService userService;
-        private readonly IMongoDatabase database;
+        private static string secretKey = "hdsacsfhfjfvjdjsjvdsjvsjdvjsdjvdsvkjsbjbfjbgjsb";
+        private static string issuer = "Manura Sanjula";
+        private static string audience = "Manura Sanjula";
+        private static UserService userService = new UserService();
 
-
-        public TokenService(MongoDbContext mongoDbContext)
-        {
-            userService = new UserService(mongoDbContext);
-        }
-
-        public TokenService(string connectionString, string databaseName)
-        {
-            userService = new UserService(connectionString, databaseName);
-        }
-
-
-        private string GenerateJwtToken(string secretKey, string issuer, string audience, int expiryMinutes, String email, String password)
+        private static string GenerateJwtToken(string secretKey, string issuer, string audience, int expiryMinutes, String email, String password)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -52,7 +39,7 @@ namespace BixbyShop_LK.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private bool ExtractCustomClaim(string jwtToken)
+        private static bool ExtractCustomClaim(string jwtToken)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.ReadJwtToken(jwtToken);
@@ -69,13 +56,13 @@ namespace BixbyShop_LK.Services
             return false;
         }
 
-        public String tokenCreator(String email, String password)
+        public static String tokenCreator(String email, String password)
         {
             int expiryMinutes = 10000;
             return GenerateJwtToken(secretKey, issuer, audience, expiryMinutes, email, password);
         }
 
-        public bool ValidateJwtToken(string token)
+        public static bool ValidateJwtToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var validationParameters = new TokenValidationParameters

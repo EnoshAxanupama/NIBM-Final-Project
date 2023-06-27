@@ -8,28 +8,12 @@ namespace BixbyShop_LK.Services
     public class UserService
     {
         private readonly IMongoCollection<User> userCollection;
-        private readonly EmailService _emailService;
-        private readonly TokenService _tokenService;
-        private readonly RolesService _rolesService;
-        private readonly IMongoDatabase database;
 
-        public UserService(MongoDbContext mongoDbContext)
+        public UserService()
         {
-            userCollection = mongoDbContext.Users;
-            _tokenService = new TokenService(mongoDbContext);
-            _emailService = new EmailService();
-            _rolesService = new RolesService(mongoDbContext);
-        }
-
-        public UserService(string connectionString, string databaseName)
-        {
-            var client = new MongoClient(connectionString);
-            database = client.GetDatabase(databaseName);
+            var client = new MongoClient("mongodb://admin:p%40ssw0rd@localhost:27017/?authMechanism=SCRAM-SHA-256");
+            var database = client.GetDatabase("BixbyShop_LK");
             userCollection = database.GetCollection<User>("Users");
-
-            _tokenService = new TokenService(connectionString,databaseName);
-            _emailService = new EmailService();
-            _rolesService = new RolesService(connectionString, databaseName);
         }
 
         public List<User> GetAllUsers()
@@ -42,15 +26,15 @@ namespace BixbyShop_LK.Services
             User existingUser = GetUserByEmail(username);
             if (existingUser == null)
             {
-                Role role = _rolesService.GetRoleByRole("User");
+                /*Role role = RolesService.GetRoleByRole("User");
                 if (role == null)
                 {
                     return "Role not found. Unable to create account.";
-                }
+                }*/
 
                 string hashedPassword = BCryptNet.HashPassword(password);
-                List<Role> rolesList = new List<Role> { role };
-                User newUser = new User { Email = username, Password = hashedPassword, Roles = rolesList.ToArray() };
+                //List<Role> rolesList = new List<Role> { role };
+                User newUser = new User { Email = username, Password = hashedPassword};
                 CreateUser(newUser);
 
                 User createdUser = GetUserByEmail(username);
@@ -59,7 +43,7 @@ namespace BixbyShop_LK.Services
                     return "Account was not created due to an error.";
                 }
 
-                return _tokenService.tokenCreator(createdUser.Email, createdUser.Password);
+                return TokenService.tokenCreator(createdUser.Email, createdUser.Password);
             }
             else
             {
@@ -72,7 +56,7 @@ namespace BixbyShop_LK.Services
             User user = GetUserByEmail(username);
             if (user != null && BCryptNet.Verify(password, user.Password))
             {
-                return _tokenService.tokenCreator(user.Email, user.Password);
+                return TokenService.tokenCreator(user.Email, user.Password);
             }
 
             return null;

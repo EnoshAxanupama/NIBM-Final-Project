@@ -6,17 +6,12 @@ using System.Net;
 
 namespace BixbyShop_LK.Services
 {
-    public class EmailService
+    public static class EmailService
     {
-        private readonly string _apiKey;
-        private readonly string fromEmail;
-        public EmailService()
-        {
-            _apiKey = "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";
-            fromEmail = "w.m.manurasanjula2003@gmail.com";
-        }
-
-        private string FormatHtml(string input, Func<string, string> valueProvider)
+        private static readonly string _apiKey = "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";
+        private static readonly string fromEmail = "w.m.manurasanjula2003@gmail.com";
+   
+        private static string FormatHtml(string input, Func<string, string> valueProvider)
         {
             string formattedHtml = Regex.Replace(input, @"\{([^{}]+)\}", match =>
             {
@@ -27,7 +22,7 @@ namespace BixbyShop_LK.Services
             return formattedHtml;
         }
 
-        private string GenerateVerificationCode(int length, String email)
+        private static string GenerateVerificationCode(int length, String email)
         {
             length = length != null ? length : 6;
 
@@ -43,7 +38,7 @@ namespace BixbyShop_LK.Services
             return verificationCode;
         }
 
-        private String emailVerificationCode(String email)
+        private static String emailVerificationCode(String email)
         {
             String text = "<!-- \r\nOnline HTML, CSS and JavaScript editor to run code online.\r\n-->\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n  <meta charset=\"UTF-8\" />\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n  <link rel=\"stylesheet\" href=\"style.css\" />\r\n  <title>Browser</title>\r\n</head>\r\n\r\n<body>\r\n  <p style=\"text-align:center\"><span style=\"color:#ffffff\"><span style=\"font-family:Comic Sans MS,cursive\"><span style=\"font-size:72px\"><u><strong><span style=\"background-color:#2ecc71\">Welcome to BixbyShop</span></strong></u></span></span></span></p>\r\n\r\n<blockquote>\r\n<p style=\"text-align:center\"><span style=\"font-size:48px\"><span style=\"font-family:Comic Sans MS,cursive\">Your Code is : {VerificationCode}</span></span></p>\r\n\r\n<p style=\"text-align:center\"><span style=\"font-size:48px\"><span style=\"font-family:Comic Sans MS,cursive\">Please Enter our Application</span></span></p>\r\n</blockquote>\r\n\r\n</body>\r\n\r\n</html>";
 
@@ -61,7 +56,7 @@ namespace BixbyShop_LK.Services
 
         }
 
-        private String forgotPasswordEmailVerification(String email)
+        private static String forgotPasswordEmailVerification(String email)
         {
             String text = "<!-- \r\nOnline HTML, CSS and JavaScript editor to run code online.\r\n-->\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n  <meta charset=\"UTF-8\" />\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n  <link rel=\"stylesheet\" href=\"style.css\" />\r\n  <title>Browser</title>\r\n</head>\r\n\r\n<body>\r\n  <p style=\"text-align:center\"><strong><u><span style=\"color:#c0392b\"><span style=\"font-family:Lucida Sans Unicode,Lucida Grande,sans-serif\"><span style=\"font-size:72px\"><span style=\"background-color:#bdc3c7\">We got you Sir/Madam 😊😊</span></span></span></span></u></strong></p>\r\n\r\n<blockquote>\r\n<p style=\"text-align:center\"><span style=\"font-size:48px\"><span style=\"color:#c0392b\"><span style=\"font-family:Lucida Sans Unicode,Lucida Grande,sans-serif\">If you fogort you password that&#39;s okay here is the code {VerificationCode} to reset your password.</span></span></span></p>\r\n\r\n<p style=\"text-align:center\"><span style=\"font-size:48px\"><span style=\"color:#c0392b\"><span style=\"font-family:Lucida Sans Unicode,Lucida Grande,sans-serif\">Please enter the code in our app&nbsp;</span></span></span></p>\r\n</blockquote>\r\n</body>\r\n\r\n</html>";
 
@@ -79,7 +74,7 @@ namespace BixbyShop_LK.Services
 
         }
 
-       public void SendEmail(string toEmail, string subject, int i)
+       public static void SendEmail(string toEmail, string subject, int i)
         {
             var client = new SendGridClient(_apiKey);
             var from = new EmailAddress(fromEmail);
