@@ -31,21 +31,24 @@ namespace BixbyShop_LK.Users_and_Roles.Services
             return rolesCollection.Find(role => role.Id == objectId).FirstOrDefault();
         }
 
+        public Roles GetRoleByRole(String role)
+        {
+            return rolesCollection.Find(role => role.Role.Equals(role)).FirstOrDefault();
+        }
+
         public void CreateRole(Roles role)
         {
             rolesCollection.InsertOne(role);
         }
 
-        public void UpdateRole(string roleId, Roles updatedRole)
+        public void UpdateRole(ObjectId roleId, Roles updatedRole)
         {
-            var objectId = new ObjectId(roleId);
-            rolesCollection.ReplaceOne(role => role.Id == objectId, updatedRole);
+            rolesCollection.ReplaceOne(role => role.Id == roleId, updatedRole);
         }
 
-        public void DeleteRole(string roleId)
+        public void DeleteRole(ObjectId roleId)
         {
-            var objectId = new ObjectId(roleId);
-            rolesCollection.DeleteOne(role => role.Id == objectId);
+            rolesCollection.DeleteOne(role => role.Id == roleId);
         }
     }
 }

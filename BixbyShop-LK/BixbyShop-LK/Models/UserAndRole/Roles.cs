@@ -9,6 +9,7 @@ namespace BixbyShop_LK.Users_and_Roles
         [BsonId]
         public ObjectId Id { get; set; }
 
+        [BsonElement("Role")]
         public String Role { get; set; }
 
         public Authority[] Authorities { get; set; }

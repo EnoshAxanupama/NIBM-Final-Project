@@ -14,6 +14,16 @@ namespace BixbyShop_LK.Config
         {
             var client = new MongoClient(connectionString);
             database = client.GetDatabase(databaseName);
+            CreateIndexes(); // Call the method to create indexes
+        }
+
+        private void CreateIndexes()
+        {
+            var rolesCollection = database.GetCollection<Roles>("Roles");
+            var roleIndex = Builders<Roles>.IndexKeys.Ascending(r => r.Role);
+            var options = new CreateIndexOptions { Unique = true };
+            var indexModel = new CreateIndexModel<Roles>(roleIndex, options);
+            rolesCollection.Indexes.CreateOne(indexModel);
         }
 
         public IMongoCollection<T> GetCollection<T>(string collectionName)

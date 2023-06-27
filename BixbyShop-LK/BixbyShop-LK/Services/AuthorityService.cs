@@ -31,9 +31,19 @@ namespace BixbyShop_LK.Users_and_Roles.Services
             return authorityCollection.Find(authority => authority.Id == objectId).FirstOrDefault();
         }
 
+        public Authority GetAuthorityByName(string name)
+        {
+            return authorityCollection.Find(authority => authority.Name == name).FirstOrDefault();
+        }
+
         public void CreateAuthority(Authority authority)
         {
             authorityCollection.InsertOne(authority);
+        }
+
+        public void CreateAuthority(List<Authority>  authorities)
+        {
+            authorityCollection.InsertMany(authorities);
         }
 
         public void UpdateAuthority(string authorityId, Authority updatedAuthority)
