@@ -1,9 +1,8 @@
+using BixbyShop_LK.Config;
 using BixbyShop_LK.Models.Comments.Services;
 using BixbyShop_LK.Models.Item.Services;
 using BixbyShop_LK.Models.Order.Services;
 using BixbyShop_LK.Services;
-using BixbyShop_LK.Users_and_Roles;
-using ServiceBase.Extensions;
 
 namespace BixbyShopApp_GUI
 {
@@ -17,73 +16,16 @@ namespace BixbyShopApp_GUI
         public static ShopItemService shopItemService = new ShopItemService();
         public static CommentService commentService = new CommentService();
 
-
-        private static void startUpDB(String roleInText)
-        {
-         
-            List<Role> rolesList = new List<Role>();
-            List<Authority> authorityList = new List<Authority>();
-
-            Role role = new Role
-            {
-                UserRole = roleInText
-            };
-
-            Authority ReadAuthority = new Authority { Name = "ReadAuthority", Roles = rolesList.ToArray() };
-            Authority WriteAuthority = new Authority { Name = "WriteAuthority", Roles = rolesList.ToArray() };
-            Authority UpdateAuthority = new Authority { Name = "UpdateAuthority", Roles = rolesList.ToArray() };
-
-            authorityList.Add(ReadAuthority);
-            authorityList.Add(WriteAuthority);
-            authorityList.Add(UpdateAuthority);
-
-            if (AuthorityService.GetAuthorityByName("ReadAuthority") == null
-                        && AuthorityService.GetAuthorityByName("WriteAuthority") == null
-                            && AuthorityService.GetAuthorityByName("UpdateAuthority") == null)
-                AuthorityService.CreateAuthority(authorityList);
-
-
-            Role userDefineRole = RolesService.GetRoleByNameViaList(roleInText);
-            if (userDefineRole == null)
-                RolesService.CreateRole(role);
-
-            if (userDefineRole != null)
-            {
-                if (userDefineRole.Authorities == null)
-                {
-                    userDefineRole.Authorities = AuthorityService.GetAllAuthorities().ToArray();
-                    RolesService.UpdateRole(userDefineRole.Id, userDefineRole);
-                }
-            }
-            userDefineRole = RolesService.GetRoleByNameViaList(roleInText);
-            if (userDefineRole != null)
-            {
-                rolesList.Add(userDefineRole);
-
-                List<Authority> authorities = AuthorityService.GetAllAuthorities();
-                if (authorities != null)
-                {
-                    authorities.ForEach(auth => {
-                        if (!auth.Roles.Any())
-                        {
-                            auth.Roles = rolesList.ToArray();
-                            AuthorityService.UpdateAuthority(auth.Id.ToString(), auth);
-                        }
-                    });
-                }
-            }
-        }
-
         [STAThread]
         static void Main()
         {
         
+            BixbyConfig.startUp();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
             ApplicationConfiguration.Initialize();
-           /* startUpDB("User");
-            startUpDB("User");*/
+          
             try
             {
                 string TokenValue = Properties.Settings.Default.TokenValue;

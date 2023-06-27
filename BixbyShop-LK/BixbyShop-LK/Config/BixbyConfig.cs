@@ -77,7 +77,7 @@
         }
     }
 
-    public class BixbyConfig
+    public static class BixbyConfig
     {
         public delegate int CallbackDelegate(String? password, String? email);
 
@@ -86,17 +86,10 @@
 
         public static void startUp()
         {
-          /*  _environmentService.setEnvironmentVariable("SendGridAPIKey", "{value}");
-            _environmentService.setEnvironmentVariable("SenderEmail", "{value}");
-*/
             service.Start();
-
-           /* service.AddOrUpdateMapValue(1, "Value 1");
-            service.AddOrUpdateMapValue(2, "Value 2");
-            service.AddOrUpdateMapValue(1, "Updated Value 1");*/
         }
 
-        public int EmailVerificationValidation_TakeTheAction(String? password,String? email, String code, CallbackDelegate callback)
+        public static int EmailVerificationValidation_TakeTheAction(String? password,String? email, String code, CallbackDelegate callback)
         {
             Dictionary<String, MapValue> map = service.Map;
             if (map.ContainsKey(email))

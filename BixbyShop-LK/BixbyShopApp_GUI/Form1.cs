@@ -1,9 +1,25 @@
+﻿using BixbyShop_LK.Services;
 using MetroFramework;
 using MetroFramework.Components;
 using MetroFramework.Forms;
+using SendGrid;
 
 namespace BixbyShopApp_GUI
 {
+    public class EmailServiceHelper : IEmailService
+    {
+        public void SendEmail(Response response)
+        {
+            if (response.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                MessageBox.Show("Email sent successfully!");
+            }
+            else
+            {
+                MessageBox.Show($"Failed to send email. Status code: {response.StatusCode}");
+            }
+        }
+    }
     public partial class UserForm : MetroForm
     {
         private MetroStyleManager metroStyleManager;
@@ -92,6 +108,10 @@ namespace BixbyShopApp_GUI
                     String token = Program.userService.CreateNewAccount(email, password, conPass);
                     MessageBox.Show(token);
                     tokenSever(token);
+
+                    IEmailService emailService = new EmailServiceHelper();
+                    EmailService._emailServiceHelper = emailService;
+                    EmailService.SendEmail(email, "Email Verification Code for Your Account 🙂🙂", 0);
                 }
             }
         }

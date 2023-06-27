@@ -1,5 +1,4 @@
-﻿using BixbyShop_LK.Users_and_Roles;
-using BixbyShop_LK.Models.Comments;
+﻿using BixbyShop_LK.Models.Comments;
 using BixbyShop_LK.Models.Order;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
@@ -17,7 +16,6 @@ namespace BixbyShop_LK
         public String Password { get; set; }
         public String Pic { get; set; }
         public bool EmailVerify { get; set; }
-        public Role[] Roles { get; set; }
         public Order[] Orders { get; set; }
         public CartAndOrder[] Cart { get; set; }
         public Comment[] Comments { get; set; }

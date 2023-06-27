@@ -1,6 +1,4 @@
-﻿using BixbyShop_LK.Services;
-using BixbyShop_LK.Users_and_Roles;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace BixbyShop_LK.Models.Item.Services

@@ -1,7 +1,7 @@
 ﻿using BCryptNet = BCrypt.Net.BCrypt;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using BixbyShop_LK.Users_and_Roles;
+using SendGrid;
 
 namespace BixbyShop_LK.Services
 {
@@ -18,6 +18,7 @@ namespace BixbyShop_LK.Services
 
         public List<User> GetAllUsers()
         {
+
             return userCollection.Find(_ => true).ToList();
         }
 
@@ -26,14 +27,7 @@ namespace BixbyShop_LK.Services
             User existingUser = GetUserByEmail(username);
             if (existingUser == null)
             {
-                /*Role role = RolesService.GetRoleByRole("User");
-                if (role == null)
-                {
-                    return "Role not found. Unable to create account.";
-                }*/
-
                 string hashedPassword = BCryptNet.HashPassword(password);
-                //List<Role> rolesList = new List<Role> { role };
                 User newUser = new User { Email = username, Password = hashedPassword};
                 CreateUser(newUser);
 
@@ -42,7 +36,6 @@ namespace BixbyShop_LK.Services
                 {
                     return "Account was not created due to an error.";
                 }
-
                 return TokenService.tokenCreator(createdUser.Email, createdUser.Password);
             }
             else
@@ -50,7 +43,6 @@ namespace BixbyShop_LK.Services
                 return $"{existingUser.Email} user already exists.";
             }
         }
-
         public string Login(string username, string password)
         {
             User user = GetUserByEmail(username);
