@@ -6,20 +6,6 @@ using SendGrid;
 
 namespace BixbyShopApp_GUI
 {
-    public class EmailServiceHelper : IEmailService
-    {
-        public void SendEmail(Response response)
-        {
-            if (response.StatusCode == System.Net.HttpStatusCode.Accepted)
-            {
-                MessageBox.Show("Email sent successfully!");
-            }
-            else
-            {
-                MessageBox.Show($"Failed to send email. Status code: {response.StatusCode}");
-            }
-        }
-    }
     public partial class UserForm : MetroForm
     {
         private MetroStyleManager metroStyleManager;
@@ -93,6 +79,7 @@ namespace BixbyShopApp_GUI
             String userPassword = password.Text.Trim();
             String token = Program.userService.Login(userName, userPassword);
             tokenSever(token);
+            new CustomMessageBox(token).ShowDialog();
         }
 
         private void NewAccount_Click(object sender, EventArgs e)
@@ -106,13 +93,27 @@ namespace BixbyShopApp_GUI
                 if (string.Equals(password, conPass))
                 {
                     String token = Program.userService.CreateNewAccount(email, password, conPass);
-                    MessageBox.Show(token);
+                    new CustomMessageBox(token).ShowDialog();
                     tokenSever(token);
 
                     IEmailService emailService = new EmailServiceHelper();
                     EmailService._emailServiceHelper = emailService;
                     EmailService.SendEmail(email, "Email Verification Code for Your Account 🙂🙂", 0);
                 }
+            }
+        }
+    }
+    public class EmailServiceHelper : IEmailService
+    {
+        public void SendEmail(Response response)
+        {
+            if (response.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                MessageBox.Show("Email sent successfully!");
+            }
+            else
+            {
+                MessageBox.Show($"Failed to send email. Status code: {response.StatusCode}");
             }
         }
     }

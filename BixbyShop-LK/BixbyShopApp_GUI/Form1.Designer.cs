@@ -315,6 +315,7 @@
             Controls.Add(metroToggle1);
             Controls.Add(metroPanel1);
             Name = "UserForm";
+            Resizable = false;
             Text = "UserForm";
             Theme = MetroFramework.MetroThemeStyle.Dark;
             Load += UserForm_Load;

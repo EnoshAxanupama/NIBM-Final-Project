@@ -69,4 +69,5 @@ C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.pdb
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.genruntimeconfig.cache
 C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\ref\BixbyShopApp_GUI.dll
-C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.EmailServiceHelper.resources
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.UserForm.resources
+C:\NIBM Group Project GUI\BixbyShop-LK\BixbyShopApp_GUI\obj\Debug\net6.0-windows\BixbyShopApp_GUI.CustomMessageBox.resources
