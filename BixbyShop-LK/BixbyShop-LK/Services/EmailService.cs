@@ -2,7 +2,6 @@
 using SendGrid;
 using System.Text.RegularExpressions;
 using BixbyShop_LK.Config;
-using ServiceBase.Notification.Email;
 
 namespace BixbyShop_LK.Services
 {
@@ -13,8 +12,8 @@ namespace BixbyShop_LK.Services
     }
     public static class EmailService
     {
-        private static readonly string _apiKey = "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";
-        private static readonly string fromEmail = "geethaliyanage23@gmail.com";
+        private static readonly string _apiKey = "wN7MBHWLUx+HjnrERSAvVXkZZiUIP2S3T7baXEbONqUHpt3E0TpmtO4KB13HtwtagJ/JjI3Njf9Cd3KbObWYtkTeufvRzNdxZPqB9rDuJs7rUWXBjFw3LDtvb5LCSXXQ";
+        private static readonly string fromEmail = "t2rtBrY8JzecZNhvbApQW/q8+ANhkWK+eOTwhDdma2n6N43+8rKtCEV3eHtphgpj";
         public static IEmailService _emailServiceHelper { get; set; }
 
         private static string FormatHtml(string input, Func<string, string> valueProvider)
@@ -80,8 +79,8 @@ namespace BixbyShop_LK.Services
 
         public static void SendEmail(string toEmail, string subject, int i)
         {
-            var client = new SendGridClient(_apiKey);
-            var from = new EmailAddress(fromEmail);
+            var client = new SendGridClient(EncryptionHelper.Decrypt(_apiKey));
+            var from = new EmailAddress(EncryptionHelper.Decrypt(fromEmail));
             var to = new EmailAddress(toEmail);
             SendGridMessage message = null;
 

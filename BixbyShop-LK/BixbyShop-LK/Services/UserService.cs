@@ -34,13 +34,13 @@ namespace BixbyShop_LK.Services
                 User createdUser = GetUserByEmail(username);
                 if (createdUser == null)
                 {
-                    return "Account was not created due to an error.";
+                    return null;
                 }
                 return TokenService.tokenCreator(createdUser.Email, createdUser.Password);
             }
             else
             {
-                return $"{existingUser.Email} user already exists.";
+                return null;
             }
         }
         public string Login(string username, string password)

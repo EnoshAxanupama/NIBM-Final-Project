@@ -1,13 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="DashBoard.cs">
+    <Compile Update="UserSide\DashBoard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Form1.cs">
+    <Compile Update="UserSide\EmailVerificationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MessageBox.cs">
+    <Compile Update="UserSide\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UserSide\MessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UserSide\PasswordResetTokenVerificationForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
