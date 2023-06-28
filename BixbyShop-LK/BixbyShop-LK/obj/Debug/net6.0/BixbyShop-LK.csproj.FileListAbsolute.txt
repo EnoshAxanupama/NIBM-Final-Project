@@ -22,3 +22,15 @@ C:\Users\MSI\Downloads\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\ne
 C:\Users\MSI\Downloads\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\refint\BixbyShop-LK.dll
 C:\Users\MSI\Downloads\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.pdb
 C:\Users\MSI\Downloads\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\ref\BixbyShop-LK.dll
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\bin\Debug\net6.0\BixbyShop-LK.deps.json
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\bin\Debug\net6.0\BixbyShop-LK.dll
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\bin\Debug\net6.0\BixbyShop-LK.pdb
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.csproj.AssemblyReference.cache
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.GeneratedMSBuildEditorConfig.editorconfig
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.AssemblyInfoInputs.cache
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.AssemblyInfo.cs
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.csproj.CoreCompileInputs.cache
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.dll
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\refint\BixbyShop-LK.dll
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\BixbyShop-LK.pdb
+C:\NIBM-Final-Project\BixbyShop-LK\BixbyShop-LK\obj\Debug\net6.0\ref\BixbyShop-LK.dll

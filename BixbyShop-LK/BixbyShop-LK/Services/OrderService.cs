@@ -21,10 +21,9 @@ namespace BixbyShop_LK.Services
             return orderCollection.Find(_ => true).ToList();
         }
 
-        public Order GetOrderById(string orderId)
+        public Order GetOrderById(ObjectId orderId)
         {
-            var objectId = new ObjectId(orderId);
-            return orderCollection.Find(order => order.Id == objectId).FirstOrDefault();
+            return orderCollection.Find(order => order.Id == orderId).FirstOrDefault();
         }
 
         public void CreateOrder(Order order)
@@ -32,16 +31,14 @@ namespace BixbyShop_LK.Services
             orderCollection.InsertOne(order);
         }
 
-        public void UpdateOrder(string orderId, Order updatedOrder)
+        public void UpdateOrder(ObjectId orderId, Order updatedOrder)
         {
-            var objectId = new ObjectId(orderId);
-            orderCollection.ReplaceOne(order => order.Id == objectId, updatedOrder);
+            orderCollection.ReplaceOne(order => order.Id == orderId, updatedOrder);
         }
 
-        public void DeleteOrder(string orderId)
+        public void DeleteOrder(ObjectId orderId)
         {
-            var objectId = new ObjectId(orderId);
-            orderCollection.DeleteOne(order => order.Id == objectId);
+            orderCollection.DeleteOne(order => order.Id == orderId);
         }
     }
 }

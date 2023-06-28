@@ -11,6 +11,11 @@
         private Thread backgroundThread;
         private bool running;
         private Dictionary<String, MapValue> map;
+
+        public bool delete(String key)
+        {
+            return map.Remove(key);
+        }
         public Dictionary<String, MapValue> Map
         {
             get { return map; }
@@ -79,7 +84,7 @@
 
     public static class BixbyConfig
     {
-        public delegate int CallbackDelegate(String? password, String? email);
+        public delegate int CallbackDelegate(String? email, String? code);
 
         //private static readonly EnvironmentService _environmentService = new EnvironmentService();
         public static MapService service = new MapService();
@@ -89,22 +94,9 @@
             service.Start();
         }
 
-        public static int EmailVerificationValidation_TakeTheAction(String? password,String? email, String code, CallbackDelegate callback)
+        public static int EmailAndAccountVerificationValidation_TakeTheAction(String? email, String code, CallbackDelegate callback)
         {
-            Dictionary<String, MapValue> map = service.Map;
-            if (map.ContainsKey(email))
-            {
-                map.TryGetValue(email, out var newValue);
-                if(newValue != null && !newValue.IsExpired)
-                {
-                    if(newValue.Value != null && newValue.Value == code)
-                    {
-                        return callback(password, email);
-                    }
-                }
-                return -1;
-            }
-            return -1;
+            return callback(email, code);
         }
 
         public static void stopUp()

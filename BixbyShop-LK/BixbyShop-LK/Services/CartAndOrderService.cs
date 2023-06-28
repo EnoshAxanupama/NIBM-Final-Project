@@ -1,8 +1,5 @@
-﻿using BixbyShop_LK.Models.Comments;
-using BixbyShop_LK.Services;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Collections.Generic;
 
 namespace BixbyShop_LK.Models.Order.Services
 {
@@ -22,10 +19,9 @@ namespace BixbyShop_LK.Models.Order.Services
             return cartAndOrderCollection.Find(_ => true).ToList();
         }
 
-        public CartAndOrder GetCartAndOrderById(string cartAndOrderId)
+        public CartAndOrder GetCartAndOrderById(ObjectId cartAndOrderId)
         {
-            var objectId = new ObjectId(cartAndOrderId);
-            return cartAndOrderCollection.Find(cartAndOrder => cartAndOrder.Id == objectId).FirstOrDefault();
+            return cartAndOrderCollection.Find(cartAndOrder => cartAndOrder.Id == cartAndOrderId).FirstOrDefault();
         }
 
         public void CreateCartAndOrder(CartAndOrder cartAndOrder)
@@ -33,16 +29,14 @@ namespace BixbyShop_LK.Models.Order.Services
             cartAndOrderCollection.InsertOne(cartAndOrder);
         }
 
-        public void UpdateCartAndOrder(string cartAndOrderId, CartAndOrder updatedCartAndOrder)
+        public void UpdateCartAndOrder(ObjectId cartAndOrderId, CartAndOrder updatedCartAndOrder)
         {
-            var objectId = new ObjectId(cartAndOrderId);
-            cartAndOrderCollection.ReplaceOne(cartAndOrder => cartAndOrder.Id == objectId, updatedCartAndOrder);
+            cartAndOrderCollection.ReplaceOne(cartAndOrder => cartAndOrder.Id == cartAndOrderId, updatedCartAndOrder);
         }
 
-        public void DeleteCartAndOrder(string cartAndOrderId)
+        public void DeleteCartAndOrder(ObjectId cartAndOrderId)
         {
-            var objectId = new ObjectId(cartAndOrderId);
-            cartAndOrderCollection.DeleteOne(cartAndOrder => cartAndOrder.Id == objectId);
+            cartAndOrderCollection.DeleteOne(cartAndOrder => cartAndOrder.Id == cartAndOrderId);
         }
     }
 }

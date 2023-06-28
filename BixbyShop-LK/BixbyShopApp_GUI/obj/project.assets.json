@@ -602,6 +602,15 @@
           }
         }
       },
+      "PresentationFramework/4.6.0": {
+        "type": "package",
+        "compile": {
+          "lib/PresentationFramework.dll": {}
+        },
+        "runtime": {
+          "lib/PresentationFramework.dll": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
         "type": "package",
         "runtimeTargets": {
@@ -2712,6 +2721,18 @@
         "newtonsoft.json.13.0.3.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "packageIcon.png"
+      ]
+    },
+    "PresentationFramework/4.6.0": {
+      "sha512": "37FpU6XcB1Hgr5X03MgUOxvzWLJYKJP72J3g5hnZHi/DXsTxpJEu4brCGW+TmplVWfntuysO/uRcZcPS9YK0Bw==",
+      "type": "package",
+      "path": "presentationframework/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/PresentationFramework.dll",
+        "presentationframework.4.6.0.nupkg.sha512",
+        "presentationframework.nuspec"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
@@ -5273,7 +5294,8 @@
       "BixbyShop-LK >= 1.0.0",
       "MailKit >= 4.1.0",
       "MetroFramework >= 1.2.0.3",
-      "MetroModernUI >= 1.4.0"
+      "MetroModernUI >= 1.4.0",
+      "PresentationFramework >= 4.6.0"
     ]
   },
   "packageFolders": {
@@ -5282,11 +5304,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopApp_GUI\\BixbyShopApp_GUI.csproj",
+      "projectUniqueName": "C:\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopApp_GUI\\BixbyShopApp_GUI.csproj",
       "projectName": "BixbyShopApp_GUI",
-      "projectPath": "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopApp_GUI\\BixbyShopApp_GUI.csproj",
+      "projectPath": "C:\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopApp_GUI\\BixbyShopApp_GUI.csproj",
       "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopApp_GUI\\obj\\",
+      "outputPath": "C:\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopApp_GUI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5303,8 +5325,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj": {
-              "projectPath": "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj"
+            "C:\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj": {
+              "projectPath": "C:\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj"
             }
           }
         }
@@ -5330,6 +5352,10 @@
           "MetroModernUI": {
             "target": "Package",
             "version": "[1.4.0, )"
+          },
+          "PresentationFramework": {
+            "target": "Package",
+            "version": "[4.6.0, )"
           }
         },
         "imports": [
@@ -5402,6 +5428,16 @@
       "warningLevel": 1,
       "message": "Package 'MetroModernUI 1.4.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "MetroModernUI",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'PresentationFramework 4.6.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "PresentationFramework",
       "targetGraphs": [
         "net6.0-windows7.0"
       ]

@@ -20,10 +20,9 @@ namespace BixbyShop_LK.Models.Comments.Services
             return commentCollection.Find(_ => true).ToList();
         }
 
-        public Comment GetCommentById(string commentId)
+        public Comment GetCommentById(ObjectId commentId)
         {
-            var objectId = new ObjectId(commentId);
-            return commentCollection.Find(comment => comment.Id == objectId).FirstOrDefault();
+            return commentCollection.Find(comment => comment.Id == commentId).FirstOrDefault();
         }
 
         public void CreateComment(Comment comment)
@@ -31,16 +30,14 @@ namespace BixbyShop_LK.Models.Comments.Services
             commentCollection.InsertOne(comment);
         }
 
-        public void UpdateComment(string commentId, Comment updatedComment)
+        public void UpdateComment(ObjectId commentId, Comment updatedComment)
         {
-            var objectId = new ObjectId(commentId);
-            commentCollection.ReplaceOne(comment => comment.Id == objectId, updatedComment);
+            commentCollection.ReplaceOne(comment => comment.Id == commentId, updatedComment);
         }
 
-        public void DeleteComment(string commentId)
+        public void DeleteComment(ObjectId commentId)
         {
-            var objectId = new ObjectId(commentId);
-            commentCollection.DeleteOne(comment => comment.Id == objectId);
+            commentCollection.DeleteOne(comment => comment.Id == commentId);
         }
     }
 }

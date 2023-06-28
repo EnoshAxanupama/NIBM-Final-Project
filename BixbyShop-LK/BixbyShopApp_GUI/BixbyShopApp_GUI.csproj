@@ -10,9 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <COMReference Include="{d37e2a3e-8545-3a39-9f4f-31827c9124ab}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>d37e2a3e-8545-3a39-9f4f-31827c9124ab</Guid>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MailKit" Version="4.1.0" />
     <PackageReference Include="MetroFramework" Version="1.2.0.3" />
     <PackageReference Include="MetroModernUI" Version="1.4.0" />
+    <PackageReference Include="PresentationFramework" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup>

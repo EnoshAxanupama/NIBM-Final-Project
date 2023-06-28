@@ -39,7 +39,7 @@ namespace BixbyShop_LK.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private static bool ExtractCustomClaim(string jwtToken)
+        private static dynamic ExtractCustomClaim(string jwtToken, bool allowBoolean)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.ReadJwtToken(jwtToken);
@@ -49,11 +49,21 @@ namespace BixbyShop_LK.Services
             var password = claims.FirstOrDefault(c => c.Type == "password");
 
             User user = userService.GetUserByEmail(email.ToString());
-            if (user != null && user.EmailVerify)
-                return user.Password == password.ToString();
+            if(user == null)
+            {
+                return null;
+            }
             else
-                return false;
-            return false;
+            {
+                if (allowBoolean)
+                {
+                    return user.Password == password.ToString();
+                }
+                else
+                {
+                    return user;
+                }
+            }
         }
 
         public static String tokenCreator(String email, String password)
@@ -62,7 +72,7 @@ namespace BixbyShop_LK.Services
             return GenerateJwtToken(secretKey, issuer, audience, expiryMinutes, email, password);
         }
 
-        public static bool ValidateJwtToken(string token)
+        public static dynamic ValidateJwtToken(string token, bool allowBoolean)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var validationParameters = new TokenValidationParameters
@@ -79,7 +89,7 @@ namespace BixbyShop_LK.Services
             {
                 SecurityToken validatedToken;
                 tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
-                return ExtractCustomClaim(token);
+                return ExtractCustomClaim(token, allowBoolean);
             }
             catch (Exception)
             {

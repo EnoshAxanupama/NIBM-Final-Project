@@ -22,6 +22,10 @@ namespace BixbyShop_LK.Services
             return userCollection.Find(_ => true).ToList();
         }
 
+        public static dynamic GetUserBasedOnToken(String user, bool allowBoolean) {
+            return TokenService.ValidateJwtToken(user, allowBoolean);
+        }
+
         public string CreateNewAccount(string username, string password, string co_password)
         {
             User existingUser = GetUserByEmail(username);
@@ -71,10 +75,10 @@ namespace BixbyShop_LK.Services
             userCollection.InsertOne(user);
         }
 
-        public void UpdateUser(string userId, User updatedUser)
+        public bool UpdateUser(string userId, User updatedUser)
         {
             var objectId = new ObjectId(userId);
-            userCollection.ReplaceOne(user => user.Id == objectId, updatedUser);
+            return userCollection.ReplaceOne(user => user.Id == objectId, updatedUser).IsAcknowledged;
         }
 
         public void DeleteUser(string userId)

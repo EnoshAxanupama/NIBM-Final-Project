@@ -19,10 +19,9 @@ namespace BixbyShop_LK.Models.Item.Services
             return shopItemCollection.Find(_ => true).ToList();
         }
 
-        public ShopItem GetShopItemById(string shopItemId)
+        public ShopItem GetShopItemById(ObjectId shopItemId)
         {
-            var objectId = new ObjectId(shopItemId);
-            return shopItemCollection.Find(shopItem => shopItem.Id == objectId).FirstOrDefault();
+            return shopItemCollection.Find(shopItem => shopItem.Id == shopItemId).FirstOrDefault();
         }
 
         public void CreateShopItem(ShopItem shopItem)
@@ -36,10 +35,9 @@ namespace BixbyShop_LK.Models.Item.Services
             shopItemCollection.ReplaceOne(shopItem => shopItem.Id == objectId, updatedShopItem);
         }
 
-        public void DeleteShopItem(string shopItemId)
+        public void DeleteShopItem(ObjectId shopItemId)
         {
-            var objectId = new ObjectId(shopItemId);
-            shopItemCollection.DeleteOne(shopItem => shopItem.Id == objectId);
+            shopItemCollection.DeleteOne(shopItem => shopItem.Id == shopItemId);
         }
     }
 }

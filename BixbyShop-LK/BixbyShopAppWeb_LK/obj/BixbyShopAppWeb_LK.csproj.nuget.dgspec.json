@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopAppWeb_LK\\BixbyShopAppWeb_LK.csproj": {}
+    "C:\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopAppWeb_LK\\BixbyShopAppWeb_LK.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopAppWeb_LK\\BixbyShopAppWeb_LK.csproj": {
+    "C:\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopAppWeb_LK\\BixbyShopAppWeb_LK.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopAppWeb_LK\\BixbyShopAppWeb_LK.csproj",
+        "projectUniqueName": "C:\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopAppWeb_LK\\BixbyShopAppWeb_LK.csproj",
         "projectName": "BixbyShopAppWeb_LK",
-        "projectPath": "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopAppWeb_LK\\BixbyShopAppWeb_LK.csproj",
+        "projectPath": "C:\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopAppWeb_LK\\BixbyShopAppWeb_LK.csproj",
         "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopAppWeb_LK\\obj\\",
+        "outputPath": "C:\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopAppWeb_LK\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,6 +55,10 @@
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
               "version": "[7.0.1, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
