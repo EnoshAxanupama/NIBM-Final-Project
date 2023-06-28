@@ -10,11 +10,11 @@ Manura Sanjula
 
 Members: 
 
-    1. Shakya,
-    1. Maleesha
-    1. Anupama
-    1. Dulmina
-    1. Manura Sanjula
+    1. Shakya
+    2. Maleesha
+    3. Anupama
+    4. Dulmina
+    5. Manura Sanjula
 
 **GitHub Link**: <https://github.com/ManuraSanjula/NIBM-Final-Project>
 
@@ -30,29 +30,28 @@ Download the project by typing in your terminal.
 **Technologies:**
 
     1. C# (The programming language)
-    1. JWT Token
-    1. MonogoDB
-    1. SendGrid
-    1. RabbitMQ
-    1. Redis
+    2. JWT Token
+    3. MonogoDB
+    4. SendGrid
+    5. RabbitMQ (not yet)
+    6. Redis (not yet)
 
 **These are list of technology so far as of now 28/06/2023 but I will add more Technologies later.** 
 
 Features that are I’m (Manura Sanjula) implemented and implementing in near future as of now I implemented. 
 
     1. User Login
-    1. User Creation
-    1. EmailVerifcation (Not 100% done still have issues)
-    1. Reset Password (Not 100% done still have issues)
-    1. Token Creation 
-    1. Generating Email 
-    1. Implementing Redis Cache
+    2. User Creation
+    3. EmailVerifcation (Not 100% done still have issues)
+    4. Reset Password (Not 100% done still have issues)
+    5. Token Creation 
+    5. Generating Email 
+    7. Implementing Redis Cache
 
 And My Team Members building and implementing GUI and other Services that are needed to run the app.
 
-**And all the team members were participating during the project.**
+**And all team members participated during the project.**
 
 If you are in our project team, please feel too free edit this one and upload to your git hub account to the project. The ReadMe file comes with the project. 
 
 And Have a FUN!!! 🙂🙂🙂🙂🙂❤️❤️❤️❤️💥💥💥💥💥
-
