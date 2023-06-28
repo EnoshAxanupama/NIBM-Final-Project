@@ -5282,11 +5282,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\NIBM Group Project GUI\\BixbyShop-LK\\BixbyShopApp_GUI\\BixbyShopApp_GUI.csproj",
+      "projectUniqueName": "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopApp_GUI\\BixbyShopApp_GUI.csproj",
       "projectName": "BixbyShopApp_GUI",
-      "projectPath": "C:\\NIBM Group Project GUI\\BixbyShop-LK\\BixbyShopApp_GUI\\BixbyShopApp_GUI.csproj",
+      "projectPath": "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopApp_GUI\\BixbyShopApp_GUI.csproj",
       "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-      "outputPath": "C:\\NIBM Group Project GUI\\BixbyShop-LK\\BixbyShopApp_GUI\\obj\\",
+      "outputPath": "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShopApp_GUI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5303,8 +5303,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\NIBM Group Project GUI\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj": {
-              "projectPath": "C:\\NIBM Group Project GUI\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj"
+            "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj": {
+              "projectPath": "C:\\Users\\MSI\\Downloads\\NIBM-Final-Project\\BixbyShop-LK\\BixbyShop-LK\\BixbyShop-LK.csproj"
             }
           }
         }

@@ -1,0 +1,5 @@
+C:\Users\MSI\Downloads\NIBM-Final-Project\BixbyShop-LK\BixbyShopAppWeb\obj\Debug\net6.0\BixbyShopAppWeb.csproj.AssemblyReference.cache
+C:\Users\MSI\Downloads\NIBM-Final-Project\BixbyShop-LK\BixbyShopAppWeb\obj\Debug\net6.0\BixbyShopAppWeb.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MSI\Downloads\NIBM-Final-Project\BixbyShop-LK\BixbyShopAppWeb\obj\Debug\net6.0\BixbyShopAppWeb.AssemblyInfoInputs.cache
+C:\Users\MSI\Downloads\NIBM-Final-Project\BixbyShop-LK\BixbyShopAppWeb\obj\Debug\net6.0\BixbyShopAppWeb.AssemblyInfo.cs
+C:\Users\MSI\Downloads\NIBM-Final-Project\BixbyShop-LK\BixbyShopAppWeb\obj\Debug\net6.0\BixbyShopAppWeb.csproj.CoreCompileInputs.cache

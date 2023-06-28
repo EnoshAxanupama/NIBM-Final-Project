@@ -101,8 +101,8 @@ namespace BixbyShopApp_GUI
 
             if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(conPass))
             {
-                bool isValid = EmailServiceHelper.ValidateEmailPattern(email);
-                if (!isValid)
+                bool isValidEmail = EmailServiceHelper.ValidateEmailPattern(email) && !EmailServiceHelper.ValidateEmailUsing_Zerobounce(email);
+                if (!isValidEmail)
                 {
                     Blur();
                     MessageBox.Show("Email Not Valid according to our Regex Patterns or We check online but I did not working Sorry ! 😣😣😣");
@@ -154,6 +154,28 @@ namespace BixbyShopApp_GUI
     }
     public class EmailServiceHelper : IEmailService
     {
+        public static bool ValidateEmailUsing_Zerobounce(string email)
+        {
+            string apiKey = "Y54EU1YFR+lhBHiNSVJITj05oG5LiSvCNpTOd10NiSbiSBEMNc7MzPds/mh216IAdz2jPEBbALGBV2QY4isjwA==";
+            apiKey = EncryptionHelper.Decrypt(apiKey);
+            string apiUrl = $"https://api.zerobounce.net/v2/validate?api_key={apiKey}&email={email}";
+
+            using (var httpClient = new HttpClient())
+            {
+                var response = httpClient.GetAsync(apiUrl).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+                    // Parse the JSON response to check the email validity status
+                    // You may need to adjust this code based on the ZeroBounce API response structure
+                    bool isValid = jsonResponse.Contains("\"status\":\"valid\"");
+                    return isValid;
+                }
+            }
+
+            return false; // Error occurred or API request failed
+        }
         public static bool ValidateEmailPattern(string email)
         {
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
