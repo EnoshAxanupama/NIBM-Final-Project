@@ -31,8 +31,10 @@ namespace BixbyShop_LK.Services
             User existingUser = GetUserByEmail(username);
             if (existingUser == null)
             {
-                string hashedPassword = BCryptNet.HashPassword(password);
-                User newUser = new User { Email = username, Password = hashedPassword};
+                User newUser = new User();
+                newUser.Email = username;
+                newUser.Password = BCryptNet.HashPassword(password);
+                newUser.Tokens = new Dictionary<string, VerficationCode>();
                 CreateUser(newUser);
 
                 User createdUser = GetUserByEmail(username);
@@ -64,10 +66,9 @@ namespace BixbyShop_LK.Services
             return userCollection.Find(filter).FirstOrDefault();
         }
 
-        public User GetUserById(string userId)
+        public User GetUserById(ObjectId userId)
         {
-            var objectId = new ObjectId(userId);
-            return userCollection.Find(user => user.Id == objectId).FirstOrDefault();
+            return userCollection.Find(user => user.Id == userId).FirstOrDefault();
         }
 
         public void CreateUser(User user)
@@ -75,16 +76,14 @@ namespace BixbyShop_LK.Services
             userCollection.InsertOne(user);
         }
 
-        public bool UpdateUser(string userId, User updatedUser)
+        public bool UpdateUser(ObjectId userId, User updatedUser)
         {
-            var objectId = new ObjectId(userId);
-            return userCollection.ReplaceOne(user => user.Id == objectId, updatedUser).IsAcknowledged;
+            return userCollection.ReplaceOne(user => user.Id == userId, updatedUser).IsAcknowledged;
         }
 
-        public void DeleteUser(string userId)
+        public void DeleteUser(ObjectId userId)
         {
-            var objectId = new ObjectId(userId);
-            userCollection.DeleteOne(user => user.Id == objectId);
+            userCollection.DeleteOne(user => user.Id == userId);
         }
     }
 }

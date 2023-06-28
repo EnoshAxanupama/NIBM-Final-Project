@@ -10,7 +10,7 @@ namespace BixbyShopApp_GUI
 {
     public partial class UserForm : MetroForm
     {
-        private void tokenSaver(String token)
+        public static void tokenSaver(String token)
         {
             try
             {

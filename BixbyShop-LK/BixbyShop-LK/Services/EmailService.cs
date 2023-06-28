@@ -1,7 +1,6 @@
 ﻿using SendGrid.Helpers.Mail;
 using SendGrid;
 using System.Text.RegularExpressions;
-using BixbyShop_LK.Config;
 
 namespace BixbyShop_LK.Services
 {
@@ -12,6 +11,7 @@ namespace BixbyShop_LK.Services
     }
     public static class EmailService
     {
+        private static readonly UserService userService = new UserService();
         private static readonly string _apiKey = "wN7MBHWLUx+HjnrERSAvVXkZZiUIP2S3T7baXEbONqUHpt3E0TpmtO4KB13HtwtagJ/JjI3Njf9Cd3KbObWYtkTeufvRzNdxZPqB9rDuJs7rUWXBjFw3LDtvb5LCSXXQ";
         private static readonly string fromEmail = "t2rtBrY8JzecZNhvbApQW/q8+ANhkWK+eOTwhDdma2n6N43+8rKtCEV3eHtphgpj";
         public static IEmailService _emailServiceHelper { get; set; }
@@ -39,10 +39,18 @@ namespace BixbyShop_LK.Services
                 int digit = random.Next(0, 10);
                 verificationCode += digit.ToString();
             }
-            BixbyConfig.service.AddOrUpdateMapValue(email, verificationCode);
+           // MapService.AddOrUpdateMapValue(email, verificationCode);
             return verificationCode;
         }
-
+        private static void userUpdate(string email, string token)
+        {
+            User user = userService.GetUserByEmail(email);
+            if (user != null)
+            {
+                user.AddToken(token, DateTime.Now.ToString());
+                userService.UpdateUser(user.Id, user);
+            }
+        }
         private static string emailVerificationCode(string email)
         {
             string text = "<!-- \r\nOnline HTML, CSS and JavaScript editor to run code online.\r\n-->\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n  <meta charset=\"UTF-8\" />\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n  <link rel=\"stylesheet\" href=\"style.css\" />\r\n  <title>Browser</title>\r\n</head>\r\n\r\n<body>\r\n  <p style=\"text-align:center\"><span style=\"color:#ffffff\"><span style=\"font-family:Comic Sans MS,cursive\"><span style=\"font-size:72px\"><u><strong><span style=\"background-color:#2ecc71\">Welcome to BixbyShop</span></strong></u></span></span></span></p>\r\n\r\n<blockquote>\r\n<p style=\"text-align:center\"><span style=\"font-size:48px\"><span style=\"font-family:Comic Sans MS,cursive\">Your Code is : {VerificationCode}</span></span></p>\r\n\r\n<p style=\"text-align:center\"><span style=\"font-size:48px\"><span style=\"font-family:Comic Sans MS,cursive\">Please Enter our Application</span></span></p>\r\n</blockquote>\r\n\r\n</body>\r\n\r\n</html>";
@@ -51,7 +59,9 @@ namespace BixbyShop_LK.Services
             {
                 if (placeholder == "VerificationCode")
                 {
-                    return GenerateVerificationCode(20, email);
+                    String code = GenerateVerificationCode(20, email);
+                    userUpdate(email, code);
+                    return code;
                 }
                 else
                 {
@@ -68,13 +78,22 @@ namespace BixbyShop_LK.Services
             {
                 if (placeholder == "VerificationCode")
                 {
-                    return GenerateVerificationCode(20, email);
+                    String code  = GenerateVerificationCode(20, email);
+                    userUpdate(email, code);
+                    return code;
                 }
                 else
                 {
                     return string.Empty;
                 }
             });
+        }
+
+        private static string successfullyResetThePassword(string email)
+        {
+            string text = "<!-- \r\nOnline HTML, CSS and JavaScript editor to run code online.\r\n-->\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n  <meta charset=\"UTF-8\" />\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n  <link rel=\"stylesheet\" href=\"style.css\" />\r\n  <title>Browser</title>\r\n</head>\r\n\r\n<body>\r\n  <h1>\r\n     \tYour password has been successfully reset..\r\n  </h1>\r\n</body>\r\n\r\n</html>";
+
+            return text;
         }
 
         public static void SendEmail(string toEmail, string subject, int i)
@@ -88,6 +107,8 @@ namespace BixbyShop_LK.Services
                 message = MailHelper.CreateSingleEmail(from, to, subject, emailVerificationCode(toEmail), emailVerificationCode(toEmail));
             else if (i == 1)
                 message = MailHelper.CreateSingleEmail(from, to, subject, forgotPasswordEmailVerification(toEmail), forgotPasswordEmailVerification(toEmail));
+            else if (i == 2)
+                message = MailHelper.CreateSingleEmail(from, to, subject, successfullyResetThePassword(toEmail), forgotPasswordEmailVerification(toEmail));
 
             var response = client.SendEmailAsync(message).GetAwaiter().GetResult();
 
@@ -97,6 +118,7 @@ namespace BixbyShop_LK.Services
             }
             else
             {
+
             }
 
         }

@@ -2,9 +2,17 @@
 using BixbyShop_LK.Models.Order;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 
 namespace BixbyShop_LK
 {
+    public class VerficationCode
+    {
+        public string dateTimeKey { get; set; }
+        public bool valid { get; set; } 
+    }
+
     public class User
     {
         [BsonId]
@@ -19,6 +27,44 @@ namespace BixbyShop_LK
         public Order[] Orders { get; set; }
         public CartAndOrder[] Cart { get; set; }
         public Comment[] Comments { get; set; }
+        public Dictionary<string, VerficationCode> Tokens { get; set; }
 
+        public User()
+        {
+            Tokens = new Dictionary<string, VerficationCode>();
+        }
+
+        public void AddToken(string token,string dateTimeKey)
+        {
+            VerficationCode verficationCode = new VerficationCode();
+            verficationCode.dateTimeKey = dateTimeKey;
+            verficationCode.valid = true;
+
+            Tokens[token] = verficationCode;
+        }
+
+        public bool IsTokenExpired(string token)
+        {
+            if (Tokens.ContainsKey(token))
+            {
+                bool isExpired = false;
+                VerficationCode verficationCode = Tokens[token];
+                if (verficationCode != null)
+                {
+                    if (verficationCode.valid)
+                    {
+                        DateTime storedDateTime = DateTime.Parse(verficationCode.dateTimeKey);
+                        DateTime currentDateTime = DateTime.Now;
+                        TimeSpan elapsed = currentDateTime - storedDateTime;
+                        isExpired = elapsed.TotalMinutes >= 15;
+                        return isExpired;
+                    }
+                    else
+                        return true;
+                }
+                return true;
+            }
+            return true; // Default value if key does not exist
+        }
     }
 }

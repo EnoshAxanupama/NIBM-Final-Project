@@ -1,4 +1,3 @@
-using BixbyShop_LK.Config;
 using BixbyShop_LK.Models.Comments.Services;
 using BixbyShop_LK.Models.Item.Services;
 using BixbyShop_LK.Models.Order.Services;
@@ -6,8 +5,26 @@ using BixbyShop_LK.Services;
 
 namespace BixbyShopApp_GUI
 {
-    internal static class Program
+    public static class Program
     {
+        public static bool IsNullOrEmpty(List<string> stringList)
+        {
+            if (stringList == null || stringList.Count == 0)
+            {
+                return true;
+            }
+
+            foreach (string str in stringList)
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
 
         // Create instances of your services and pass the MongoDB context if needed
         public static UserService userService = new UserService();
@@ -20,7 +37,6 @@ namespace BixbyShopApp_GUI
         static void Main()
         {
         
-            BixbyConfig.startUp();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
